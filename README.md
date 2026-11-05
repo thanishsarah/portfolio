@@ -1,6 +1,14 @@
 # Vinayak Thanish — Portfolio
 
-A responsive React portfolio focused on education, curriculum development, educator training, and digital media literacy. Content is drawn from the supplied résumé. Original SVG project illustrations are labeled as illustrations, rather than presented as screenshots of delivered products.
+A responsive React portfolio focused on education, curriculum development, educator training, and digital media literacy. Content is drawn from the supplied résumé. Its “living curriculum” design combines deep forest, chartreuse, and warm paper tones, original diagrams, and a custom VT identity.
+
+## Brand and interactions
+
+The **VT Pathway** mark connects an open V with a shared T canopy; a detached seed suggests the next connection. The reusable component is `src/BrandMark.jsx`, the transparent vector asset is `public/brand-mark.svg`, and `public/favicon.svg` provides the matching site icon.
+
+The interactive learning map offers Curriculum, AI literacy, and Strategy lenses, each opening its corresponding initiative. Project filters and native modal dialogs provide keyboard access and focus restoration. Experience entries expand individually. Email can be opened or copied.
+
+Motion has a persistent on/off control, follows the system’s reduced-motion preference, and pauses when the document is hidden. Pointer responses use animation frames and update CSS without re-rendering the page. All initiative illustrations are original SVGs labeled as illustrations; they are not screenshots of delivered products. No animation library, tracking, external font request, or additional runtime dependency is required.
 
 ## Develop
 
