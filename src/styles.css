@@ -295,7 +295,7 @@
     .node-literacy { left: 19%; }.node-strategy { left: 79%; }.coordinate-top { font-size: 5px; left: 1%; }.coordinate-bottom { font-size: 5px; }
     .lens-summary { padding-top: 18px; min-height: 145px; padding-bottom: 6px; }.lens-number { font-size: 6px; }.lens-summary p { font-size: 36px; }.lens-description { font-size: 10px; max-width: 370px; }.map-explore { width: 40px; height: 40px; }
     .hero-bottom { margin-top: -10px; padding: 21px 0 25px; font-size: 6px; letter-spacing: .3px; gap: 15px; }.hero-bottom > span:first-child { max-width: 52%; }.hero-bottom a { gap: 8px; }
-    .manifesto-strip { padding: 22px 0 24px; }.manifesto-strip .container { gap: 12px; }.manifesto-strip span { font-size: clamp(21px, 4.4vw, 31px); letter-spacing: -1px; }.manifesto-strip svg { width: 17px; height: 17px; }
+    .manifesto-strip { padding: 22px 0 24px; }.manifesto-strip .container { gap: 6px; }.manifesto-strip span { font-size: clamp(16px, 4.1vw, 26px); letter-spacing: -.5px; }.manifesto-strip svg { width: 12px; height: 12px; }
     .work-section { padding-top: 63px; padding-bottom: 59px; }.eyebrow { font-size: 8px; }
     .section-heading { align-items: flex-start; flex-direction: column; gap: 23px; }.section-heading h2 { font-size: clamp(31px, 5.5vw, 43px); letter-spacing: -1.5px; margin-top: 19px; }.section-heading h2 em { letter-spacing: -1.5px; }.section-heading > p { font-size: 10px; padding-bottom: 0; }
     .work-toolbar { margin: 29px 0 22px; padding-top: 19px; }.filters { gap: 3px; }.filter { font-size: 9px; padding: 8px 11px; }.project-count { font-size: 6px; }
@@ -313,7 +313,7 @@
   @media (max-width: 370px) {
     .hero h1 { font-size: 59px; }.hero-copy > .eyebrow { font-size: 6px; }.hero-signature { font-size: 9px; }.hero-actions { gap: 18px; }.button { gap: 20px; padding: 14px 17px; font-size: 11px; }
     .node-label { font-size: 9px; }.node-index { display: none; }.map-node { padding: 9px 10px; }.node-dot { width: 4px; height: 4px; }.system-core { width: 70px; height: 70px; }.system-core svg { width: 41px; height: 41px; }.system-topline { font-size: 6px; }.system-indicator { font-size: 5px; }.lens-description { font-size: 9px; }.lens-summary p { font-size: 33px; }
-    .manifesto-strip .container { gap: 8px; }.manifesto-strip span { font-size: 20px; }.manifesto-strip svg { width: 13px; height: 13px; }.project-count { display: none; }.filter { padding-inline: 10px; }
+    .manifesto-strip .container { gap: 4px; }.manifesto-strip span { font-size: 16px; }.manifesto-strip svg { width: 10px; height: 10px; }.project-count { display: none; }.filter { padding-inline: 10px; }
     .about-heading h2 { font-size: 52px; }.about-symbol svg { width: 57px; }.contact-section h2 { font-size: 38px; }.contact-mark svg { width: 31px; }.contact-mark { top: 4px; }.footer-utilities { gap: 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
