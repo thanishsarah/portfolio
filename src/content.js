@@ -5,8 +5,8 @@ export const profile = {
   location: 'Delhi NCR, India',
   role: 'Education Advisor / Curriculum Manager / Trainer',
   introduction: 'I bring together curriculum design, educator training, and AI literacy to help future skills take shape in the classroom.',
-  about: 'I’m Vinayak, an education professional based in Delhi NCR. My work spans academic affairs, curriculum development, and educator training. At Media Shala, MRIIRS, I manage Future Skills and Sustainability curriculum and digital media literacy initiatives, drawing on experience at Jain University and MetFilm School Berlin.',
-  interests: ['Curriculum development', 'AI & media literacy', 'Educator training', 'Future skills'],
+  about: 'I’m Vinayak, an education professional based in Delhi NCR. My work spans academic affairs, curriculum development, and educator training. At Media Shala, MRIIRS, I manage Future Skills and Sustainability curriculum and digital media literacy initiatives, drawing on experience at Jain University and MetFilm School Berlin. My practice also includes IB-aligned curriculum communication and international education frameworks.',
+  interests: ['Curriculum development', 'AI & media literacy', 'Educator training', 'Future skills', 'IB-aligned curriculum communication', 'International education frameworks'],
   email: 'thanishvinayak009@gmail.com',
   socialLinks: [],
 };

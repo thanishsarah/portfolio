@@ -27,6 +27,23 @@ Edit `src/content.js` to update your name, role, introduction, biography, intere
 
 Update the description and theme color in `index.html` as needed. Styling lives in `src/styles.css`; the original decorative project illustrations live in `src/ProjectArtwork.jsx`.
 
+## Confidential curriculum work
+
+The curriculum showcase publishes only newly written, high-level overviews in `src/curriculum.js`. Visitors can filter topics, read public overviews, and contact Vinayak to discuss access. The original curriculum documents, spreadsheet contents, lesson sequences, exercises, rubrics, internal links, and page images are not included in the site or repository. Grade labels are used only where the overview can be stated confidently.
+
+The separate international curriculum section uses reviewed public descriptions in `src/international.js`. It describes IB-aligned curriculum communication, international learning frameworks, and future-skills connections without asserting employment by the IB organisation, certification, or institutional authorisation. Updated résumé files and source documents stay outside the website and repository.
+
+Keep confidential originals and any extracted text outside this checkout. Do not place them in `public/`, import them into application code, or put them in repository history. `.gitignore` excludes common source-document types, and the Vite build guard checks source/public assets and the actual generated output for disallowed documents, embedded documents, private file references, and symlinks. This is an accidental-publication safeguard; newly written public summaries still require content review.
+
+Run the confidentiality checks with:
+
+```sh
+npm test
+npm run build
+```
+
+Public browser content can be copied or captured. Removing download buttons, blocking selection, and hiding links do not provide confidentiality. This site therefore exposes no original-document viewer or original-file endpoint. Any future authenticated previews would require separate server-side authorization and would still permit screenshots by viewers.
+
 ## Production
 
 ```sh

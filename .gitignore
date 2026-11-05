@@ -5,3 +5,15 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Confidential curriculum originals belong outside this public checkout.
+*.pdf
+*.xlsx
+*.xls
+*.xlsm
+*.ods
+*.docx
+*.pptx
+private/
+confidential/
+private-curriculum/

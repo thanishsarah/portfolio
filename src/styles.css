@@ -187,6 +187,8 @@
   .about-copy .about-intro { font-size: 19px; line-height: 1.8; color: var(--forest); letter-spacing: -.3px; }
   .about-copy > p:not(.about-intro) { color: var(--muted-dark); font-size: 12px; line-height: 1.9; margin-top: 24px; }
   .interests { display: flex; flex-wrap: wrap; gap: 12px 20px; border-top: 1px solid var(--light-line); padding-top: 23px; margin-top: 28px; }
+  .skills-label { margin-top: 26px; font: 8px/1.8 var(--mono); letter-spacing: 1px; text-transform: uppercase; color: var(--muted-dark); }
+  .skills-label + .interests { margin-top: 12px; }
   .interests > span { display: flex; align-items: center; gap: 7px; font-size: 9px; }
   .interest-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rust); }
   .education { border-top: 1px solid var(--light-line); padding-top: 31px; margin-top: 60px; }
