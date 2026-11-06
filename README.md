@@ -1,14 +1,16 @@
 # Vinayak Thanish — Portfolio
 
-A responsive React portfolio focused on education, curriculum development, educator training, and digital media literacy. Content is drawn from the supplied résumé. Its “living curriculum” design combines deep forest, chartreuse, and warm paper tones, original diagrams, and a custom VT identity.
+A leadership-first React portfolio positioning Vinayak Thanish around AI integration for education, content, communications, and brand systems. It gives India and international conversations equal visibility, with a separate advisory enquiry route. The current AI integration remit is explicitly ongoing; completed rollout, ROI, executive titles, and formal IB credentials are not inferred from the supplied materials.
 
 ## Brand and interactions
 
 The **VT Pathway** mark connects an open V with a shared T canopy; a detached seed suggests the next connection. The reusable component is `src/BrandMark.jsx`, the transparent vector asset is `public/brand-mark.svg`, and `public/favicon.svg` provides the matching site icon.
 
-The interactive learning map offers Curriculum, AI literacy, and Strategy lenses, each opening its corresponding initiative. Project filters and native modal dialogs provide keyboard access and focus restoration. Experience entries expand individually. Email can be opened or copied.
+The dedicated AI integration section offers four interactive workstreams: content creation, institutional communication, brand and promotion, and business promotion. Human-review checkpoints and the feedback loop are explicitly proposed design principles, not claims of installed institutional governance. Working-context links are supplied by the portfolio owner and do not imply endorsement. Selected work explains roles, scope, and evidence boundaries; project filters and native modal dialogs provide keyboard access and focus restoration.
 
-Motion has a persistent on/off control, follows the system’s reduced-motion preference, and pauses when the document is hidden. Pointer responses use animation frames and update CSS without re-rendering the page. All initiative illustrations are original SVGs labeled as illustrations; they are not screenshots of delivered products. No animation library, tracking, external font request, or additional runtime dependency is required.
+The contact section prioritizes leadership enquiries and offers a separate consulting/advisory route with an appropriate email subject. Experience entries expand individually; formal résumé titles remain intact. The visual identity uses warm white, ink navy, cobalt, and muted moss, with original diagrams and the custom VT mark. Manrope is self-hosted through Fontsource; its OFL license is included in `public/licenses/manrope.txt`. The social sharing image is generated from an original SVG composition.
+
+Motion has a persistent on/off control, follows the system’s reduced-motion preference, and pauses when the document is hidden. All initiative illustrations are original SVGs labeled as illustrations; they are not screenshots of delivered products. No animation library, tracking, external font request, backend, or API key is required.
 
 ## Develop
 
@@ -51,7 +53,7 @@ npm run build
 npm run preview
 ```
 
-Deploy the generated `dist/` directory to a static hosting provider. The site has not been published or connected to a domain.
+Deploy the generated `dist/` directory to a static hosting provider. This portfolio is published through GitHub Pages at https://thanishsarah.github.io/portfolio/; new changes appear after a successful deployment run.
 
 ## Publish with GitHub Pages
 

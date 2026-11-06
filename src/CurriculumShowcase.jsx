@@ -100,7 +100,7 @@ export default function CurriculumShowcase() {
   return <section id="curriculum" className="curriculum-section" aria-labelledby="curriculum-title">
     <div className="container curriculum-container">
       <div className="curriculum-heading">
-        <div><p className="curriculum-kicker">02 / CURRICULUM DESIGN</p><h2 id="curriculum-title">Curriculum,<br /><em>with intention.</em></h2></div>
+        <div><p className="curriculum-kicker">03 / CURRICULUM PRACTICE</p><h2 id="curriculum-title">Curriculum,<br /><em>with intention.</em></h2></div>
         <div className="curriculum-heading-note"><CurriculumGlyph index={1} /><p>Considered structures.<br />Room for discovery.</p></div>
       </div>
 

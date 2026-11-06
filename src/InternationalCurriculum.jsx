@@ -27,7 +27,7 @@ export default function InternationalCurriculum() {
 
   return <section id="international" className="international-section" aria-labelledby="international-title">
     <div className="container international-container">
-      <p className="international-kicker">03 / INTERNATIONAL PERSPECTIVES</p>
+      <p className="international-kicker">04 / INTERNATIONAL PERSPECTIVES</p>
       <div className="international-heading">
         <h2 id="international-title">Learning,<br /><em>across perspectives.</em></h2>
         <p>{internationalPractice.introduction}</p>

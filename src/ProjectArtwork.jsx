@@ -1,9 +1,9 @@
 import React from 'react';
 
-const forest = '#102421';
-const cream = '#f5f3e9';
-const lime = '#dbf994';
-const rust = '#b9573e';
+const forest = '#14283b';
+const cream = '#f4f3ed';
+const lime = '#3156df';
+const rust = '#68806d';
 const mono = "'Courier New', monospace";
 
 export default function ProjectArtwork({ kind }) {
