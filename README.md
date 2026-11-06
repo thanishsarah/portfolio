@@ -1,74 +1,85 @@
-# Vinayak Thanish — The Signal Atlas
+# Vinayak Thanish — Portfolio
 
-A playable orbital portfolio built with React, Vite, and a procedural Canvas renderer. Fly a probe, stabilise at three relays, recover their signals, and return to the observatory. Each relay connects to Vinayak’s real work in learning, communication, and AI integration. The portfolio archive is always available; gameplay does not gate the professional record.
+A leadership-first React portfolio positioning Vinayak Thanish around AI integration for education, content, communications, and brand systems. It gives India and international conversations equal visibility, with a separate advisory enquiry route. The current AI integration remit is explicitly ongoing; completed rollout, ROI, executive titles, and formal IB credentials are not inferred from the supplied materials.
 
-## Play
+## Experience and interactions
 
-- WASD or arrow keys: thrust in world directions.
-- Space: brake. E: hold to scan a nearby relay. Q: cycle the target.
-- P / Escape: pause or resume. R: recover after capture.
-- Touch: flight stick plus hold-to-brake and hold-to-scan controls.
-- Guided flight: route planning, stabilisation, scanning, and return. Manual thrust or braking immediately takes control back.
-- Sector map / follow view, optional procedural sound, reduced effects, flight guide, and engineering inspection are available from the control rail.
+The portfolio connects a visitor’s challenge, relevant experience, an inspectable editorial decision, and a contextual conversation. The three practice lenses in `src/practice-model.js` share state with the case explorer and conversation brief. Case narratives distinguish current remit, experience, personal responsibility, working approach, and public organisational context.
 
-Scanning requires proximity, speed below 55 game units per second, and a continuous 1.5-second hold. The central horizon captures the probe. Recovery keeps discoveries and returns to a safe checkpoint with a score penalty. All three signals and a slow observatory return complete the expedition.
+`src/DecisionStudio.jsx` is an original fictional workflow workbench. A Web Worker evaluates deterministic editorial rules. Revision-bound results, explicit sample approval, local snapshots, cancellation, retirement, restoration, and replay are governed by the pure model in `src/workflow-engine.js`. Edits invalidate dependent work and approval; stale worker replies are ignored. The bounded session journal compacts older events into a replay checkpoint. Exported traces contain only the fictional example, and the checksum supports repeatability rather than authentication. There is no AI service or publication endpoint; this is a portfolio demonstration.
 
-## Simulation and rendering
+Explored cases and the visitor’s optional challenge remain in page memory. The contact area previews the complete conversation brief before an explicit copy or email action. Reset clears the route and draft; reloading does not preserve them. No analytics, tracking, external font request, database, or API key is required. A persistent motion preference is the only local-storage setting.
 
-`src/game/simulation.js` is a pure deterministic model. It applies softened inverse-square gravity, normalised thrust, bounded speed, damping, braking, and boundary reflection. The controller advances physics at a fixed 1/120-second step, caps accumulated frame gaps, and separates simulation time from visual time. This is a stylised Newtonian game; the disc and lensing arcs are artistic interpretations.
+The curriculum and international overviews are supporting disclosures, with direct fragment links that reveal the relevant section. Curriculum search, filters, and native overview dialogs remain keyboard accessible. Formal résumé titles and qualifications remain intact.
 
-Guided flight builds a visibility graph around an exclusion circle, uses Dijkstra’s algorithm to find safe waypoints, and follows them with bounded steering and gravity compensation. Coast prediction uses the same gravity model. Tests cover deterministic replay, pause, control normalisation, scan gates, capture/recovery, save validation, route clearance, and a complete guided mission.
+The VT Assembly mark, original project illustrations, and parametric ribbon sculpture share the charcoal, warm stone, bronze, and mineral-green palette. Source vectors live in `public/` and `src/ProjectArtwork.jsx`. Manrope is self-hosted through Fontsource; its OFL license is in `public/licenses/manrope.txt`. Motion follows system preferences and the footer control. The sculpture uses deterministic geometry and bounded pointer tilt without a render loop. Ctrl/Cmd+K opens a keyboard-accessible search of approved public content; topic selection reveals and filters the supporting index.
 
-`src/game/render-scene.js` owns cached procedural nebulae, stars, a luminous black-hole sprite, station glyphs, routes, trajectories, and ship effects. It does not mutate game state or run its own animation loop. Backing buffers and pixel density are bounded. Physics and rendering pause when the tab loses focus or the archive/guide opens. Reduced effects follow the system preference and the player’s control.
+## Develop
 
-`src/game/use-game.js` owns input, the fixed-step loop, camera, progress saves, optional audio, lifecycle cleanup, and local frame samples. Held inputs clear on blur, pointer cancellation, modal entry, and phase changes. Browser modifier shortcuts are not intercepted; repeated pause keys do not toggle repeatedly.
-
-## Public archive and identity
-
-The archive contains current AI scope, four work accounts, ten searchable public curriculum overviews, international perspectives, formal roles, education, and an explicit email enquiry route. It distinguishes ongoing AI integration from curriculum implementation across seven schools. IB-aligned communication does not imply IB employment or certification. The fictional game does not add astronaut, astrophysics, or game-development employment credentials.
-
-The VT Orbit mark, space palette, and original graphics form the visual identity. Source vector assets are in `public/`; the mark component is `src/BrandMark.jsx`. Manrope is self-hosted through Fontsource, with its OFL license in `public/licenses/manrope.txt`. No external images, animation library, inference service, API key, tracking, or backend is required.
-
-## Privacy and confidential work
-
-Only newly written public summaries are included. Original curriculum documents, spreadsheet contents, lesson sequences, internal links, source images, and the private creative reference are excluded. The revised résumé files are delivered separately outside this public checkout.
-
-Versioned flight progress is saved on the current device under `vt-signal-atlas-v1`. It contains recovered relay IDs, checkpoint, time, target, and recovery count. The motion preference uses `vt-motion`. A new expedition clears the saved flight. The optional contact draft remains in memory and enters an encoded email link only for an explicit user action. It is not included in game saves.
-
-`.gitignore` excludes source-document formats. The Vite build guard scans source/public assets and actual generated output for disallowed documents, embedded documents, private paths, and symlinks. Public summaries still require factual review.
-
-## Develop and verify
-
-Use Node.js 22.12+; Node 24 is available in the cloud environment.
+Use Node.js 22.12+ (Node 24 is available in this environment).
 
 ```sh
 npm ci
-npm test
-npm run build
 npm run dev
 ```
 
-The development server defaults to port 5173. No database or credentials are needed for the application. Use the existing checkout; do not create a worktree for setup unless requested.
+The development server uses port 5173 by default. No API keys, database, or backend service is required.
 
-## Content
+## Content and presentation
 
-- `src/content.js`: personal details, formal experience, education.
-- `src/case-studies.js`: grounded public accounts and evidence boundaries.
+- `src/content.js`: personal details, professional record, and education.
+- `src/case-studies.js`: public case narratives and evidence boundaries.
+- `src/practice-model.js`: shared challenge lenses and conversation-brief composition.
 - `src/ai-practice.js`: current AI remit and workstreams.
-- `src/curriculum.js`, `src/international.js`: approved public overviews.
-- `src/game/simulation.js`: world, mission mechanics, and navigation.
-- `src/game/SpacePortfolio.jsx`: game interface and accessible HTML controls.
-- `src/game/PortfolioArchive.jsx`: public professional archive.
+- `src/curriculum.js` and `src/international.js`: public educational overviews.
+- `src/decision-studio.js`: the original fictional review example.
+- `src/workflow-engine.js` and `src/workflow.worker.js`: deterministic lifecycle, dependency validation, rule execution, and replay.
+- `src/portfolio-search.js`: the public search index and ranking.
+- `src/signal-geometry.js`: parametric sculpture geometry.
+- `src/experience.css`: global design rules and shell; feature styles live beside their components.
 
-Update metadata in `index.html` when the identity or public URL changes.
+Update the description and theme color in `index.html` as needed. Personal source documents, phone number, date of birth, and confidential originals are excluded from the website.
 
-## Publish
+## Confidential curriculum work
 
-The existing `.github/workflows/deploy.yml` installs locked dependencies, runs tests, builds with the configured Pages base, checks public assets, and deploys `dist/` after pushes to `main`. Manual project-path builds use:
+The curriculum showcase publishes only newly written, high-level overviews in `src/curriculum.js`. Visitors can filter topics, read public overviews, and contact Vinayak to discuss access. The original curriculum documents, spreadsheet contents, lesson sequences, exercises, rubrics, internal links, and page images are not included in the site or repository. Grade labels are used only where the overview can be stated confidently.
+
+The separate international curriculum section uses reviewed public descriptions in `src/international.js`. It describes IB-aligned curriculum communication, international learning frameworks, and future-skills connections without asserting employment by the IB organisation, certification, or institutional authorisation. Updated résumé files and source documents stay outside the website and repository.
+
+Keep confidential originals and any extracted text outside this checkout. Do not place them in `public/`, import them into application code, or put them in repository history. `.gitignore` excludes common source-document types, and the Vite build guard checks source/public assets and the actual generated output for disallowed documents, embedded documents, private file references, and symlinks. This is an accidental-publication safeguard; newly written public summaries still require content review.
+
+Run the confidentiality checks with:
+
+```sh
+npm test
+npm run build
+```
+
+Public browser content can be copied or captured. Removing download buttons, blocking selection, and hiding links do not provide confidentiality. This site therefore exposes no original-document viewer or original-file endpoint. Any future authenticated previews would require separate server-side authorization and would still permit screenshots by viewers.
+
+## Production
+
+```sh
+npm run build
+npm run preview
+```
+
+Deploy the generated `dist/` directory to a static hosting provider. This portfolio is published through GitHub Pages at https://thanishsarah.github.io/portfolio/; new changes appear after a successful deployment run.
+
+## Publish with GitHub Pages
+
+The workflow in `.github/workflows/deploy.yml` installs dependencies with `npm ci`, builds the site using the Pages base path, and deploys `dist/`. Once committed and pushed, it runs on pushes to `main` and can also be started manually from the repository’s Actions tab.
+
+In the GitHub repository, open **Settings → Pages** and set **Source** to **GitHub Actions**. Push the website and workflow to `main`, then check the deployment result in Actions. The expected address after a successful deployment is [https://thanishsarah.github.io/portfolio/](https://thanishsarah.github.io/portfolio/). Adding the workflow alone does not publish the site.
+
+To reproduce the project’s Pages asset paths locally:
 
 ```sh
 npm run build -- --base=/portfolio/
-npm run preview -- --base=/portfolio/
 ```
 
-Validate the generated site and deployment result; an open process or port alone does not demonstrate a working game.
+The workflow reads the base path from GitHub Pages so its build can also accommodate a configured custom domain.
+
+## Cloud tasks
+
+Use the existing `/workspace/portfolio` checkout. Each task is already isolated, so no additional Git worktree is needed. Dependencies and built files can persist in an environment snapshot, but the development server must be started in each new runtime.
