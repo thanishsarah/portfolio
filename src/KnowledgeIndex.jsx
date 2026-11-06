@@ -93,6 +93,11 @@ export default function KnowledgeIndex() {
     return () => removeEventListener("portfolio:knowledge", reveal);
   }, []);
 
+  function chooseView(nextView) {
+    setView(nextView);
+    history.replaceState(history.state, "", `#${nextView}`);
+  }
+
   function switchTab(event, index) {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     let next;
@@ -103,7 +108,7 @@ export default function KnowledgeIndex() {
     else if (event.key === "End") next = views.length - 1;
     else return;
     event.preventDefault();
-    setView(views[next].id);
+    chooseView(views[next].id);
     tabs.current[next]?.focus();
   }
 
@@ -147,7 +152,7 @@ export default function KnowledgeIndex() {
               aria-selected={view === item.id}
               aria-controls={item.id}
               tabIndex={view === item.id ? 0 : -1}
-              onClick={() => setView(item.id)}
+              onClick={() => chooseView(item.id)}
               onKeyDown={(event) => switchTab(event, index)}
             >
               <span aria-hidden="true">0{index + 1}</span>

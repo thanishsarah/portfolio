@@ -8,6 +8,8 @@ import KnowledgeIndex from "./KnowledgeIndex";
 import { AIPractice, Background, Contact } from "./PortfolioSections";
 import { caseStudies } from "./case-studies";
 import { buildConversationBrief } from "./practice-model";
+import useExperienceMotion from "./useExperienceMotion";
+import "./refinements.css";
 const AncientGame = lazy(() => import("./AncientGame"));
 
 class GameBoundary extends React.Component {
@@ -110,7 +112,9 @@ function useMotion() {
   return { enabled, reduced, allowed: enabled && !reduced && visible, toggle };
 }
 export default function Portfolio() {
+  const surface = useRef(null);
   const motion = useMotion();
+  useExperienceMotion(surface, motion.allowed);
   const [focus, setFocus] = useState("ai");
   const [selectedCase, setSelectedCase] = useState("ai-literacy");
   const [request, setRequest] = useState(null);
@@ -282,7 +286,7 @@ export default function Portfolio() {
     if (["curriculum", "international"].includes(id)) {
       dispatchEvent(
         new CustomEvent("portfolio:knowledge", {
-          detail: { view: id, query: options?.query },
+          detail: { view: id, query: options?.query ?? "" },
         }),
       );
       goTo("library");
@@ -319,6 +323,7 @@ export default function Portfolio() {
   }
   return (
     <div
+      ref={surface}
       className="portfolio atelier-site"
       data-motion={motion.allowed ? "on" : "off"}
     >
@@ -481,6 +486,7 @@ export default function Portfolio() {
           request={request}
           onSelect={setSelectedCase}
           onVisited={remember}
+          onNavigate={navigatePublic}
           onDiscuss={(item) => {
             remember(item.id);
             goTo("contact");

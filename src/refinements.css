@@ -1,0 +1,293 @@
+@layer components {
+  :root {
+    --muted: #505d49;
+    --moss: #5a6c51;
+    --readable-muted: #505d49;
+    --readable-caption: #705330;
+    --anchor-offset: 112px;
+  }
+  html {
+    scroll-padding-top: var(--anchor-offset);
+  }
+  main section[id],
+  .adoption-workspace,
+  .knowledge-panel {
+    scroll-margin-top: 0;
+  }
+
+  /* Light remains ornament; reading ink carries a stronger contrast. */
+  .wg-label,
+  .wg-section-heading > div:last-child > p,
+  .wg-panel-status,
+  .wg-panel-description,
+  .wg-gallery-footnote > p,
+  .wg-dialog-heading > p:last-child,
+  .wg-dialog-remit > div:last-child dd,
+  .wg-dialog-human p,
+  .wg-evidence-boundary,
+  .wg-dialog-connections > a > span > span,
+  .atelier-section-heading > p,
+  .atelier-section-heading > div:last-child > p,
+  .adoption-context > .adoption-lead + p,
+  .adoption-panel > p,
+  .atelier-principles p,
+  .knowledge-boundary,
+  .atelier-career-aside > span,
+  .atelier-career-item > summary > span:nth-child(2) > span,
+  .atelier-education > div > p,
+  .architecture-study figcaption,
+  .architecture-place {
+    color: var(--readable-muted);
+  }
+  .wg-section-heading > div:last-child > span,
+  .wg-panel-topline,
+  .wg-panel-topline > span:last-child,
+  .wg-dialog-art > span,
+  .wg-dialog-remit dt,
+  .wg-dialog-approach > ol > li > span,
+  .adoption-context .micro-label,
+  .adoption-contexts > a,
+  .adoption-contexts > span,
+  .adoption-tabs > button > span,
+  .adoption-panel > ul,
+  .adoption-review > span,
+  .atelier-principles > div > span,
+  .knowledge-tabs > button > span,
+  .knowledge-search-row > span,
+  .knowledge-topic-number,
+  .knowledge-overview-top,
+  .knowledge-category,
+  .knowledge-category > span,
+  .knowledge-area-index,
+  .knowledge-international-skills > p,
+  .atelier-career-period,
+  .atelier-education > div > span,
+  .atelier-references > summary small {
+    color: var(--readable-caption);
+  }
+  .adoption-tabs > button:not([aria-selected="true"]) {
+    color: var(--readable-muted);
+  }
+  .adoption-tabs > button[aria-selected="true"] > span {
+    color: #ccab80;
+  }
+  .atelier-section-heading h2 em {
+    color: #5a6c51;
+  }
+  .knowledge-search > input::placeholder {
+    color: #5e6855;
+  }
+  .atelier-career-item > summary > span:last-child,
+  .atelier-references > summary > span:last-child {
+    color: #85603a;
+  }
+
+  /* Fine surface grain is confined below the content. */
+  .work-gallery,
+  .atelier-practice,
+  .knowledge-section,
+  .atelier-background {
+    position: relative;
+    isolation: isolate;
+  }
+  .work-gallery::before,
+  .atelier-practice::before,
+  .knowledge-section::before,
+  .atelier-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.48' filter='url(%23g)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+  }
+  .wg-panel {
+    box-shadow: 0 2px 0 #6c4e2910;
+  }
+  .atelier-button,
+  .atelier-fields > button,
+  .wg-panel,
+  .adoption-tabs > button,
+  .knowledge-topic-list > button {
+    --touch-x: 50%;
+    --touch-y: 50%;
+    position: relative;
+  }
+  .atelier-button::before,
+  .atelier-fields > button::before,
+  .wg-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    background: radial-gradient(
+      180px circle at var(--touch-x) var(--touch-y),
+      #f8e2bb16,
+      transparent 75%
+    );
+    transition: opacity 180ms ease;
+  }
+  .atelier-button {
+    box-shadow:
+      inset 0 1px 0 #fff4d440,
+      0 2px 0 #00000012;
+  }
+  .atelier-hero :focus-visible,
+  .atelier-header :focus-visible,
+  .atelier-contact :focus-visible,
+  .atelier-play :focus-visible {
+    outline-color: #e0be8e;
+  }
+  .threshold-edge-light {
+    fill: none;
+    stroke: #f3d7a8;
+    stroke-width: 0.8;
+    opacity: 0.18;
+    pointer-events: none;
+    transition: opacity 400ms ease;
+  }
+  .threshold-art:hover .threshold-edge-light {
+    opacity: 0.38;
+  }
+  .game-dialog[open],
+  .wg-dialog[open],
+  .portfolio-search-dialog[open] {
+    animation: chamber-arrive 180ms ease-out both;
+  }
+  @keyframes chamber-arrive {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    [data-motion="on"] .atelier-button,
+    [data-motion="on"] .atelier-fields > button,
+    [data-motion="on"] .adoption-tabs > button,
+    [data-motion="on"] .knowledge-topic-list > button,
+    [data-motion="on"] .atelier-intents > button,
+    [data-motion="on"] .wg-panel {
+      transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 220ms ease,
+        translate 160ms ease;
+    }
+    .atelier-button:hover::before,
+    .atelier-fields > button:hover::before,
+    .wg-panel:hover::before {
+      opacity: 1;
+    }
+    .wg-panel:hover {
+      border-color: #9b7a51;
+      box-shadow: 0 14px 35px #3f2e160e;
+    }
+    .wg-panel .project-artwork {
+      transition: filter 300ms ease;
+    }
+    .wg-panel:hover .project-artwork {
+      filter: brightness(1.04) saturate(1.03);
+    }
+  }
+  .atelier-button:active,
+  .atelier-fields > button:active,
+  .adoption-tabs > button:active,
+  .knowledge-topic-list > button:active,
+  .atelier-intents > button:active,
+  .wg-panel-open:active {
+    translate: 0 1px;
+    box-shadow: inset 0 2px 4px #2a25151c;
+  }
+  .ur-game .ur-primary:not(:disabled),
+  .ur-game .ur-match-types > button,
+  .ur-game .ur-move-choices > button {
+    transition:
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      translate 150ms ease;
+  }
+  .ur-game .ur-primary:not(:disabled):active,
+  .ur-game .ur-match-types > button:active,
+  .ur-game .ur-move-choices > button:active {
+    translate: 0 1px;
+    box-shadow: inset 0 2px 4px #242a1d33;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ur-game .ur-primary:not(:disabled):hover {
+      background: #334c39;
+    }
+  }
+  [data-motion="off"] .threshold-edge-light {
+    transition: none;
+  }
+  [data-motion="off"] .game-dialog,
+  [data-motion="off"] .wg-dialog {
+    animation: none;
+  }
+  html:has(.portfolio[data-motion="off"]) .portfolio-search-dialog[open] {
+    animation: none;
+  }
+}
+@layer responsive {
+  .portfolio[data-motion="off"] button,
+  .portfolio[data-motion="off"] a,
+  .portfolio[data-motion="off"] :is(button, a)::before {
+    transition: none;
+  }
+  .wg-panel-description {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .wg-panel-subtitle {
+    font-size: 12px;
+  }
+  .wg-panel-status,
+  .wg-panel-topline {
+    font-size: 9px;
+  }
+  .wg-gallery-footnote > p {
+    font-size: 12px;
+  }
+  .knowledge-boundary {
+    font-size: 12px;
+  }
+  @media (max-width: 760px) {
+    :root {
+      --anchor-offset: 94px;
+    }
+    html {
+      scroll-padding-top: var(--anchor-offset);
+    }
+    .wg-panel-description {
+      font-size: 12px;
+    }
+    .wg-panel-subtitle {
+      font-size: 12px;
+    }
+    .wg-panel-topline {
+      font-size: 8px;
+    }
+    .atelier-references > summary {
+      min-height: 78px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atelier-button::before,
+    .atelier-fields > button::before,
+    .wg-panel::before,
+    .threshold-edge-light {
+      transition: none;
+    }
+    .game-dialog[open],
+    .wg-dialog[open],
+    .portfolio-search-dialog[open] {
+      animation: none;
+    }
+  }
+}

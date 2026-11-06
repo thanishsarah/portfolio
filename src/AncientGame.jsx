@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   createUrGame,
   getUrMoves,
@@ -9,6 +15,7 @@ import {
   UR_ROSETTES,
 } from "./ur-game";
 import "./ancient-game.css";
+import useUrMotion from "./use-ur-motion";
 
 function seed() {
   return crypto.getRandomValues(new Uint32Array(1))[0] || 1;
@@ -65,40 +72,159 @@ export default function AncientGame({
 }) {
   const [game, setGame] = useState(() => createUrGame({ seed: seed() }));
   const [visible, setVisible] = useState(!document.hidden);
+  const [reduced, setReduced] = useState(
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const [compact, setCompact] = useState(
+    () =>
+      matchMedia(
+        "(max-width: 760px), (max-width: 1024px) and (max-height: 520px)",
+      ).matches,
+  );
+  const root = useRef(null);
+  const currentGame = useRef(game);
+  currentGame.current = game;
+  const keyboard = useRef({ active: false, anchor: null, internal: false });
   const moves = useMemo(() => getUrMoves(game), [game]);
   const human = game.turn === "human";
   const playable = active && visible;
+  const moving = playable && motion && !reduced;
+  const pieceMotion = useUrMotion(root, game, moving);
+  function commit(next, animate = true) {
+    if (next === currentGame.current) return;
+    if (animate) pieceMotion.prepare();
+    else pieceMotion.stop();
+    currentGame.current = next;
+    setGame(next);
+  }
+  function inputIntent(event) {
+    keyboard.current.active = Boolean(event && event.detail === 0);
+    keyboard.current.anchor = event?.currentTarget || null;
+  }
   useEffect(() => {
     const update = () => setVisible(!document.hidden);
     document.addEventListener("visibilitychange", update);
     return () => document.removeEventListener("visibilitychange", update);
   }, []);
   useEffect(() => {
+    const preference = matchMedia("(prefers-reduced-motion: reduce)");
+    const layout = matchMedia(
+      "(max-width: 760px), (max-width: 1024px) and (max-height: 520px)",
+    );
+    const updateMotion = () => setReduced(preference.matches);
+    const updateLayout = () => setCompact(layout.matches);
+    preference.addEventListener("change", updateMotion);
+    layout.addEventListener("change", updateLayout);
+    return () => {
+      preference.removeEventListener("change", updateMotion);
+      layout.removeEventListener("change", updateLayout);
+    };
+  }, []);
+  useLayoutEffect(() => {
+    const header = root.current
+      ?.closest(".game-dialog")
+      ?.querySelector(".game-dialog-header");
+    if (!header) return;
+    const measure = () => {
+      const height = header.getBoundingClientRect().height;
+      if (height > 0)
+        root.current?.style.setProperty("--ur-room-header", `${height}px`);
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, [active]);
+  useEffect(() => {
+    const cancel = () => {
+      keyboard.current.active = false;
+    };
+    const key = (event) => {
+      if (["Tab", "Escape"].includes(event.key)) cancel();
+    };
+    const focus = (event) => {
+      const flow = keyboard.current;
+      if (!flow.active || flow.internal || event.target === flow.anchor) return;
+      if (
+        event.target === document.body &&
+        (!flow.anchor?.isConnected || flow.anchor?.disabled)
+      )
+        return;
+      cancel();
+    };
+    document.addEventListener("pointerdown", cancel, true);
+    document.addEventListener("keydown", key, true);
+    document.addEventListener("focusin", focus, true);
+    return () => {
+      document.removeEventListener("pointerdown", cancel, true);
+      document.removeEventListener("keydown", key, true);
+      document.removeEventListener("focusin", focus, true);
+    };
+  }, []);
+  useLayoutEffect(() => {
+    if (!playable) {
+      keyboard.current.active = false;
+      return;
+    }
+    const flow = keyboard.current;
+    if (!flow.active) return;
+    const selector = game.winner
+      ? '[data-ur-action="replay"]'
+      : !human
+        ? "[data-ur-status]"
+        : game.phase === "move"
+          ? '[data-ur-action="move"]'
+          : '[data-ur-action="cast"]';
+    const candidate = [...root.current.querySelectorAll(selector)].find(
+      (element) => !element.disabled && element.getClientRects().length,
+    );
+    if (candidate) {
+      flow.internal = true;
+      candidate.focus({ preventScroll: true });
+      flow.anchor = candidate;
+      flow.internal = false;
+    }
+  }, [game, playable, compact]);
+  useEffect(() => {
     if (!playable || human || game.winner) return;
     const previous = game;
     const timer = setTimeout(
-      () =>
-        setGame((current) => {
-          if (current !== previous) return current;
-          if (current.phase === "roll") return rollUr(current);
+      () => {
+        const current = currentGame.current;
+        if (current !== previous) return;
+        if (current.phase === "roll") commit(rollUr(current));
+        else {
           const move = chooseUrMove(current);
-          return move ? moveUr(current, move.piece) : current;
-        }),
+          if (move) commit(moveUr(current, move.piece));
+        }
+      },
       motion ? 650 : 180,
     );
     return () => clearTimeout(timer);
   }, [game, human, playable, motion]);
-  function restart(pieces = game.pieces) {
-    setGame(createUrGame({ pieces, seed: seed() }));
+  function restart(pieces = game.pieces, event) {
+    inputIntent(event);
+    commit(createUrGame({ pieces, seed: seed() }), false);
   }
-  function cast() {
+  function changeMatch(pieces, event) {
+    if (pieces === currentGame.current.pieces) return;
+    restart(pieces, event);
+  }
+  function cast(event) {
     if (!playable || !human || game.phase !== "roll") return;
+    inputIntent(event);
     onExplore();
-    setGame(rollUr);
+    commit(rollUr(currentGame.current));
   }
-  function move(piece) {
-    if (playable && human && game.phase === "move")
-      setGame((previous) => moveUr(previous, piece));
+  function move(piece, event) {
+    if (playable && human && game.phase === "move") {
+      inputIntent(event);
+      commit(moveUr(currentGame.current, piece));
+    }
   }
   const uniqueMoves = moves.filter(
     (item, index, array) =>
@@ -108,15 +234,27 @@ export default function AncientGame({
   const exitMove = human ? moves.find((item) => item.exit) : null;
   const finished = (player) =>
     game.positions[player].filter((position) => position === 14).length;
+  const primaryLabel = game.winner
+    ? "Begin another race"
+    : !human
+      ? "The Archivist is thinking…"
+      : game.phase === "move"
+        ? "Choose a highlighted destination"
+        : "Cast the four stones";
+  const moveLabel = (item) =>
+    item.exit
+      ? `Bring piece ${item.piece + 1} home`
+      : `${item.from < 0 ? "Enter" : item.capture >= 0 ? "Capture with" : "Move"} piece ${item.piece + 1} · square ${item.to + 1}`;
   return (
     <section
+      ref={root}
       className="ur-game"
       data-phase={game.phase}
       data-turn={game.turn}
       data-winner={game.winner || ""}
       data-revision={game.revision}
       data-active={playable}
-      data-motion={motion ? "on" : "off"}
+      data-motion={moving ? "on" : "off"}
       aria-labelledby="ur-title"
     >
       <div className="ur-intro">
@@ -128,18 +266,77 @@ export default function AncientGame({
           <button
             type="button"
             aria-pressed={game.pieces === 3}
-            onClick={() => restart(3)}
+            onClick={(event) => changeMatch(3, event)}
           >
             Quick / 3 pieces
           </button>
           <button
             type="button"
             aria-pressed={game.pieces === 7}
-            onClick={() => restart(7)}
+            onClick={(event) => changeMatch(7, event)}
           >
             Full / 7 pieces
           </button>
         </div>
+      </div>
+      <div className="ur-action-dock" aria-label="Turn controls">
+        <div className="ur-dock-top">
+          <span>
+            {game.winner
+              ? "RACE COMPLETE"
+              : human
+                ? "YOUR TURN / IVORY"
+                : "THE ARCHIVIST’S TURN"}
+          </span>
+          <span>
+            CAST <strong>{game.roll === null ? "—" : game.roll}</strong>
+          </span>
+        </div>
+        <p
+          className="ur-dock-message"
+          data-ur-status
+          tabIndex={-1}
+          role={compact ? "status" : undefined}
+          aria-live={compact ? "polite" : undefined}
+        >
+          {game.message}
+        </p>
+        <button
+          type="button"
+          className="ur-primary"
+          data-ur-action={game.winner ? "replay" : "cast"}
+          onClick={(event) =>
+            game.winner ? restart(game.pieces, event) : cast(event)
+          }
+          disabled={
+            !game.winner && (!playable || !human || game.phase !== "roll")
+          }
+        >
+          {primaryLabel}
+          <span aria-hidden="true">
+            {game.winner || game.phase === "move" ? "→" : "◇"}
+          </span>
+        </button>
+        {human && game.phase === "move" && (
+          <div
+            className="ur-move-choices"
+            role="group"
+            aria-label="Choose a legal move"
+          >
+            {uniqueMoves.map((item) => (
+              <button
+                type="button"
+                key={item.piece}
+                data-ur-action="move"
+                onClick={(event) => move(item.piece, event)}
+                disabled={!playable}
+              >
+                {moveLabel(item)}
+                <span aria-hidden="true">→</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="ur-layout">
         <div className="ur-table">
@@ -210,6 +407,7 @@ export default function AncientGame({
                       <span
                         className="ur-piece-token human"
                         data-piece={ownPiece}
+                        data-ur-piece={`human-${ownPiece}`}
                       >
                         {ownPiece + 1}
                       </span>
@@ -218,6 +416,7 @@ export default function AncientGame({
                       <span
                         className="ur-piece-token archivist"
                         data-piece={aiPiece}
+                        data-ur-piece={`archivist-${aiPiece}`}
                       >
                         {aiPiece + 1}
                       </span>
@@ -234,9 +433,10 @@ export default function AncientGame({
                     key={cell}
                     className={`ur-square${rosette ? " is-rosette" : ""} is-legal`}
                     aria-label={`Move piece ${legal.piece + 1} to ${label}`}
-                    onClick={() => move(legal.piece)}
+                    onClick={(event) => move(legal.piece, event)}
                     disabled={!playable}
                     data-destination={humanIndex}
+                    data-ur-action="move"
                   >
                     {content}
                   </button>
@@ -270,7 +470,11 @@ export default function AncientGame({
               <div>
                 {game.positions.human.map((position, i) =>
                   position === -1 ? (
-                    <span className="ur-piece-token human" key={i}>
+                    <span
+                      className="ur-piece-token human"
+                      key={i}
+                      data-ur-piece={`human-${i}`}
+                    >
                       {i + 1}
                     </span>
                   ) : null,
@@ -282,8 +486,9 @@ export default function AncientGame({
               {homeMove && (
                 <button
                   type="button"
-                  onClick={() => move(homeMove.piece)}
+                  onClick={(event) => move(homeMove.piece, event)}
                   disabled={!playable}
+                  data-ur-action="move"
                 >
                   Enter a piece <span aria-hidden="true">→</span>
                 </button>
@@ -294,7 +499,11 @@ export default function AncientGame({
               <div>
                 {game.positions.archivist.map((position, i) =>
                   position === -1 ? (
-                    <span className="ur-piece-token archivist" key={i}>
+                    <span
+                      className="ur-piece-token archivist"
+                      key={i}
+                      data-ur-piece={`archivist-${i}`}
+                    >
                       {i + 1}
                     </span>
                   ) : null,
@@ -361,7 +570,13 @@ export default function AncientGame({
                   : "Now, choose your move."
                 : "An opponent with a plan."}
           </h4>
-          <p className="ur-live-message" role="status" aria-live="polite">
+          <p
+            className="ur-live-message"
+            data-ur-status
+            tabIndex={-1}
+            role={compact ? undefined : "status"}
+            aria-live={compact ? "off" : "polite"}
+          >
             {game.message}
           </p>
           <div className="ur-casting-tray" aria-label="Last cast">
@@ -372,7 +587,7 @@ export default function AncientGame({
                   index={i}
                   value={game.dice[i] || 0}
                   revision={game.casts}
-                  motion={motion}
+                  motion={moving}
                 />
               ))}
             </div>
@@ -392,7 +607,8 @@ export default function AncientGame({
             <button
               type="button"
               className="ur-primary"
-              onClick={() => restart()}
+              data-ur-action="replay"
+              onClick={(event) => restart(game.pieces, event)}
             >
               Begin another race <span aria-hidden="true">→</span>
             </button>
@@ -400,6 +616,7 @@ export default function AncientGame({
             <button
               type="button"
               className="ur-primary"
+              data-ur-action="cast"
               onClick={cast}
               disabled={!playable || !human || game.phase !== "roll"}
             >
@@ -417,7 +634,8 @@ export default function AncientGame({
             <button
               type="button"
               className="ur-home-action"
-              onClick={() => move(exitMove.piece)}
+              data-ur-action="move"
+              onClick={(event) => move(exitMove.piece, event)}
               disabled={!playable}
             >
               Bring piece {exitMove.piece + 1} home{" "}
@@ -431,6 +649,22 @@ export default function AncientGame({
                 <small>/{game.pieces}</small>
               </strong>
               <span>YOUR PIECES HOME</span>
+              <div
+                className="ur-finished-tokens"
+                aria-label="Your finished pieces"
+              >
+                {game.positions.human.map((position, i) =>
+                  position === 14 ? (
+                    <span
+                      className="ur-piece-token human"
+                      key={i}
+                      data-ur-piece={`human-${i}`}
+                    >
+                      {i + 1}
+                    </span>
+                  ) : null,
+                )}
+              </div>
             </div>
             <div>
               <strong>
@@ -438,6 +672,22 @@ export default function AncientGame({
                 <small>/{game.pieces}</small>
               </strong>
               <span>ARCHIVIST HOME</span>
+              <div
+                className="ur-finished-tokens"
+                aria-label="Archivist finished pieces"
+              >
+                {game.positions.archivist.map((position, i) =>
+                  position === 14 ? (
+                    <span
+                      className="ur-piece-token archivist"
+                      key={i}
+                      data-ur-piece={`archivist-${i}`}
+                    >
+                      {i + 1}
+                    </span>
+                  ) : null,
+                )}
+              </div>
             </div>
           </div>
           <div className="ur-journal">
@@ -470,7 +720,11 @@ export default function AncientGame({
               Inspect the game logic ↗
             </a>
           </details>
-          <button type="button" className="ur-reset" onClick={() => restart()}>
+          <button
+            type="button"
+            className="ur-reset"
+            onClick={(event) => restart(game.pieces, event)}
+          >
             Restart this match
           </button>
           <p className="ur-local-note">

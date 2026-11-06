@@ -46,11 +46,11 @@ function Arrow({ diagonal = false, ...props }) {
   );
 }
 
-function CaseDialog({ item, onClose, onDiscuss }) {
+function CaseDialog({ item, onClose, onDiscuss, onNavigate }) {
   const dialog = useRef(null);
   const closeButton = useRef(null);
-  const callbacks = useRef({ onClose, onDiscuss });
-  callbacks.current = { onClose, onDiscuss };
+  const callbacks = useRef({ onClose, onDiscuss, onNavigate });
+  callbacks.current = { onClose, onDiscuss, onNavigate };
 
   useEffect(() => {
     const element = dialog.current;
@@ -74,7 +74,23 @@ function CaseDialog({ item, onClose, onDiscuss }) {
     close();
     callbacks.current.onDiscuss?.(item);
   }
-  function visitConnection() {
+  function visitConnection(event) {
+    const target = event.currentTarget.getAttribute("href");
+    const navigate = callbacks.current.onNavigate;
+    if (
+      typeof navigate === "function" &&
+      target?.startsWith("#") &&
+      event.button === 0 &&
+      !event.metaKey &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.shiftKey
+    ) {
+      event.preventDefault();
+      close();
+      requestAnimationFrame(() => navigate(target.slice(1)));
+      return;
+    }
     close();
   }
 
@@ -247,10 +263,11 @@ export default function WorkGallery({
   onSelect = () => {},
   onVisited = () => {},
   onDiscuss = () => {},
+  onNavigate,
 }) {
   const [openId, setOpenId] = useState(null);
-  const callbacks = useRef({ onSelect, onVisited, onDiscuss });
-  callbacks.current = { onSelect, onVisited, onDiscuss };
+  const callbacks = useRef({ onSelect, onVisited, onDiscuss, onNavigate });
+  callbacks.current = { onSelect, onVisited, onDiscuss, onNavigate };
 
   function openAccount(id) {
     if (!caseStudies.some((item) => item.id === id)) return;
@@ -351,6 +368,11 @@ export default function WorkGallery({
           item={opened}
           onClose={() => setOpenId(null)}
           onDiscuss={(item) => callbacks.current.onDiscuss(item)}
+          onNavigate={
+            typeof onNavigate === "function"
+              ? (target) => callbacks.current.onNavigate?.(target)
+              : undefined
+          }
         />
       )}
     </section>

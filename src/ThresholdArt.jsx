@@ -413,6 +413,10 @@ export default function ThresholdArt({ focus = "ai", motion = true }) {
               strokeOpacity=".3"
               strokeWidth=".8"
             />
+            <path
+              className="threshold-edge-light"
+              d="M137 471V156H169V127H201V100H403V127H435V471"
+            />
           </g>
 
           <g className="threshold-steps">

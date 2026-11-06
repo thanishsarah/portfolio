@@ -23,7 +23,9 @@ No backend, API key, external font request, analytics, or database is required. 
 - `src/KnowledgeIndex.jsx`: ten searchable public curriculum overviews and international perspectives, with native keyboard tabs and a selected overview.
 - `src/ThresholdArt.jsx`: original procedural SVG architecture, bounded pointer response, and visibility-aware atmosphere. No video or image source is embedded.
 - `src/AncientGame.jsx` and `src/ur-game.js`: game interface and pure, deterministic Royal Game of Ur interpretation.
-- `src/portfolio.css`: explicit display, body, utility, and responsive typography roles. Feature styles are beside their components.
+- `src/portfolio.css` and `src/refinements.css`: explicit typography roles, stronger reading contrast, measured anchor spacing, material surfaces, and tactile controls. Feature styles are beside their components.
+- `src/useExperienceMotion.js`: progressive one-time section arrivals and fine-pointer light, with cancellation for focus, anchor navigation, hidden pages, and reduced motion.
+- `src/use-ur-motion.js`: presentation-only stone movement between start, board, and finished wells; game rules never wait for animation.
 
 Instrument Serif regular and true italic are used for display headings. Manrope serves body copy and controls. Both are pinned and self-hosted; licenses are in `public/licenses/`. The primary display font is preloaded. Portalled search and native dialogs use the same type system. There are no Indic fonts in the current website.
 
@@ -35,7 +37,7 @@ The optional game is loaded as a separate code chunk on first opening. A quick r
 
 Own pieces cannot share a square. A shared-road capture returns the rival to its start; the central rosette is protected. Rosettes grant another cast, and an exact cast is required to finish. A zero or blocked cast passes the turn. The opponent weighs progress, capture, exact exits, extra casts, and weighted capture risk; it is an inspectable heuristic, not a generative-AI service.
 
-The model keeps casting reproducible from a seed and returns immutable state. Tests cover route geometry, binary casting, entry/blocking, exact exit, captures, rosette safety, extra casts, frozen inputs, legal opponent choices, and complete races for both match lengths. The browser interface pauses computer timers while the dialog is closed or the page is hidden. No match is uploaded or persisted. Rules are explicitly a modern playable interpretation; the British Museum board is linked for historical context.
+The model keeps casting reproducible from a seed and returns immutable state. Tests cover route geometry, binary casting, entry/blocking, exact exit, captures, rosette safety, extra casts, frozen inputs, legal opponent choices, and complete races for both match lengths. The browser interface pauses computer timers while the dialog is closed or the page is hidden. Stone movement, captures, rosette echoes, and the victory light use cancellable Web Animations. Mobile controls stay near the top of the room and offer 44px legal-move choices. Short landscape screens use a smaller header and a bounded, two-column control dock, keeping the first cast in view. Keyboard actions hand focus to the next useful control; choosing the already-active match length preserves the race. No match is uploaded or persisted. Rules are explicitly a modern playable interpretation; the British Museum board is linked for historical context.
 
 ## Professional content and confidentiality
 
@@ -49,7 +51,7 @@ Keep confidential originals and extracted text outside the repository. The Vite 
 
 ## Accessibility and motion
 
-Navigation, work accounts, knowledge tabs, public search, and game controls support keyboard use. Native dialogs close with Escape and restore focus. The mobile navigation also supports Escape. Motion follows system preferences, the footer control, and page visibility. The architectural drawing stops decorative motion offscreen. Game state remains intact when the room closes, and the computer resumes only when the room is active.
+Navigation, work accounts, knowledge tabs, public search, and game controls support keyboard use. Native dialogs close with Escape and restore focus. The mobile navigation also supports Escape. Motion follows system preferences, the footer control, and page visibility. Reading content remains visible if animation APIs are unavailable; focused and linked destinations settle immediately. Public knowledge tabs keep their fragment links synchronized, and work-account connections route explicitly after the dialog closes. The architectural drawing stops decorative motion offscreen. Game state remains intact when the room closes, and the computer resumes only when the room is active.
 
 ## Cloud environment
 
