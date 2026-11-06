@@ -1,12 +1,12 @@
 import React from 'react';
 
-const forest = '#14283b';
-const cream = '#f4f3ed';
-const lime = '#3156df';
-const rust = '#68806d';
+const forest = '#18231f';
+const cream = '#eee7d8';
+const rust = '#52634f';
 const mono = "'Courier New', monospace";
 
 export default function ProjectArtwork({ kind }) {
+  const lime = kind === 'design' ? '#8b471f' : '#c5a36d';
   return (
     <svg
       className="project-artwork"
@@ -110,7 +110,7 @@ export default function ProjectArtwork({ kind }) {
       ) : kind === 'development' ? (
         <>
           <rect width="600" height="420" fill={forest} />
-          <g stroke="#365249" strokeWidth=".6" strokeOpacity=".55">
+          <g stroke="#3c4b3e" strokeWidth=".6" strokeOpacity=".55">
             {Array.from({ length: 14 }, (_, index) => (
               <path key={`v-${index}`} d={`M${40 + index * 40} 80V340`} />
             ))}
@@ -125,28 +125,28 @@ export default function ProjectArtwork({ kind }) {
             <React.Fragment key={index}>
               <path
                 d={`M40 ${126 + index * 20}C128 ${126 + index * 20} 132 ${306 - index * 9} 211 ${306 - index * 9}S297 ${106 + index * 10} 365 210S471 ${112 + index * 18} 560 ${112 + index * 18}`}
-                stroke={index % 3 === 0 ? lime : '#9cbea8'}
+                stroke={index % 3 === 0 ? lime : '#bdb8a9'}
                 strokeWidth={index === 4 ? '1.8' : '.9'}
                 strokeOpacity={index % 3 === 0 ? '.95' : '.65'}
               />
-              <circle cx="40" cy={126 + index * 20} r="2" fill={index % 3 === 0 ? lime : '#9cbea8'} />
-              <circle cx="560" cy={112 + index * 18} r="2" fill={index % 3 === 0 ? lime : '#9cbea8'} />
+              <circle cx="40" cy={126 + index * 20} r="2" fill={index % 3 === 0 ? lime : '#bdb8a9'} />
+              <circle cx="560" cy={112 + index * 18} r="2" fill={index % 3 === 0 ? lime : '#bdb8a9'} />
             </React.Fragment>
           ))}
 
-          <path d="M120 90H168V119" stroke="#719383" strokeWidth=".9" />
+          <path d="M120 90H168V119" stroke="#8a967c" strokeWidth=".9" />
           <circle cx="120" cy="90" r="5" fill={lime} />
           <circle cx="120" cy="90" r="11" stroke={lime} strokeOpacity=".4" />
-          <circle cx="365" cy="210" r="61" stroke="#97b19d" strokeWidth=".8" strokeDasharray="2 6" />
+          <circle cx="365" cy="210" r="61" stroke="#b5bba5" strokeWidth=".8" strokeDasharray="2 6" />
           <circle cx="365" cy="210" r="45" fill={forest} stroke={lime} strokeWidth="1" />
           <circle cx="365" cy="210" r="31" fill={cream} />
           <circle cx="365" cy="210" r="9" fill={rust} />
           <path d="M365 265V310H443" stroke={lime} strokeWidth=".8" />
           <circle cx="443" cy="310" r="2.5" fill={lime} />
           <text x="365" y="331" fill={cream} fontFamily={mono} fontSize="8" letterSpacing="1.2">HUMAN JUDGEMENT</text>
-          <path d="M40 355H560" stroke="#557265" strokeOpacity=".6" />
+          <path d="M40 355H560" stroke="#6d7a62" strokeOpacity=".6" />
           <text x="40" y="383" fill={cream} fontFamily={mono} fontSize="8" letterSpacing="1.2">QUESTION. CREATE. VERIFY.</text>
-          <text x="560" y="383" textAnchor="end" fill="#a9c3aa" fontFamily={mono} fontSize="8">02 / LITERACY</text>
+          <text x="560" y="383" textAnchor="end" fill="#c9cfb9" fontFamily={mono} fontSize="8">02 / LITERACY</text>
         </>
       ) : (
         <>
@@ -155,7 +155,7 @@ export default function ProjectArtwork({ kind }) {
           <text x="40" y="46" fill={cream} fontFamily={mono} fontSize="9" letterSpacing="1.1">FUTURE SKILLS ECOSYSTEM</text>
           <text x="560" y="46" textAnchor="end" fill={cream} fontFamily={mono} fontSize="9">03 / CONNECT</text>
 
-          <circle cx="300" cy="211" r="137" stroke="#edaa8b" strokeWidth=".7" strokeDasharray="2 5" />
+          <circle cx="300" cy="211" r="137" stroke="#c5a36d" strokeWidth=".7" strokeDasharray="2 5" />
           <ellipse cx="300" cy="211" rx="200" ry="79" transform="rotate(-24 300 211)" stroke={cream} strokeWidth="1.2" />
           <ellipse cx="300" cy="211" rx="200" ry="79" transform="rotate(24 300 211)" stroke={cream} strokeWidth="1.2" />
           <ellipse cx="300" cy="211" rx="130" ry="64" transform="rotate(90 300 211)" stroke={cream} strokeWidth="1.2" />

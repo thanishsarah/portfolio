@@ -11,15 +11,15 @@ function HumanReviewLoop() {
     <div className="ai-process-heading"><p>Human direction / AI-supported work</p><span>DESIGN PRINCIPLE</span></div>
     <svg className="ai-process-diagram" viewBox="0 0 600 130" fill="none" aria-hidden="true" focusable="false">
       <g stroke="currentColor" strokeWidth="1.1" opacity=".35"><path d="M94 42h112M244 42h106M400 42h106" /><path d="m200 38 6 4-6 4m144-8 6 4-6 4m156-8 6 4-6 4" /><path d="M525 62v38H75V62" /><path d="m71 68 4-6 4 6" /></g>
-      <circle cx="75" cy="42" r="19" fill="#f4f3ed" stroke="#14283b" strokeWidth="1.2" />
-      <circle cx="75" cy="38" r="4" stroke="#14283b" strokeWidth="1.2" /><path d="M68 49c0-6 14-6 14 0" stroke="#14283b" strokeWidth="1.2" strokeLinecap="round" />
-      <rect x="206" y="23" width="38" height="38" rx="8" fill="#14283b" />
-      <g stroke="#f4f3ed" strokeWidth="1.1"><path d="M219 31v22m12-22v22m-17-16h22m-22 10h22" /><circle cx="225" cy="42" r="3" fill="#f4f3ed" /></g>
-      <circle cx="375" cy="42" r="25" stroke="#3156df" strokeWidth="1" opacity=".28" />
-      <circle cx="375" cy="42" r="19" fill="#3156df" /><path d="m367 42 5 5 11-12" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="525" cy="42" r="19" fill="#f4f3ed" stroke="#68806d" strokeWidth="1.2" />
-      <path d="M531 39a7 7 0 1 0 0 7m-1-13 2 7-7-1" stroke="#68806d" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="300" cy="100" r="3" fill="#68806d" />
+      <circle cx="75" cy="42" r="19" fill="#eee7d8" stroke="#18231f" strokeWidth="1.2" />
+      <circle cx="75" cy="38" r="4" stroke="#18231f" strokeWidth="1.2" /><path d="M68 49c0-6 14-6 14 0" stroke="#18231f" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="206" y="23" width="38" height="38" rx="8" fill="#c5a36d" />
+      <g stroke="#18231f" strokeWidth="1.1"><path d="M219 31v22m12-22v22m-17-16h22m-22 10h22" /><circle cx="225" cy="42" r="3" fill="#18231f" /></g>
+      <circle cx="375" cy="42" r="25" stroke="#c5a36d" strokeWidth="1" opacity=".28" />
+      <circle cx="375" cy="42" r="19" fill="#c5a36d" /><path d="m367 42 5 5 11-12" stroke="#18231f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="525" cy="42" r="19" fill="#eee7d8" stroke="#52634f" strokeWidth="1.2" />
+      <path d="M531 39a7 7 0 1 0 0 7m-1-13 2 7-7-1" stroke="#52634f" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="300" cy="100" r="3" fill="#52634f" />
     </svg>
     <ol className="ai-process-labels"><li>Human direction</li><li>AI-supported work</li><li>Human review</li><li>Refine &amp; improve</li></ol>
     <p className="ai-process-caption">A proposed approach: people set the intention, review the output, and decide what moves forward.</p>

@@ -1,13 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#f4f3ed"/>
-  <path d="M70 114H1130M70 542H1130" stroke="#d8dde0"/>
-  <g fill="#14283b" transform="translate(59 26) scale(.9)"><path d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"/><path d="M45 15H71V23H61V49H53V23H44L45 15Z"/><circle cx="57" cy="61" r="4.5"/></g>
-  <text x="148" y="76" font-family="Arial,sans-serif" font-size="23" font-weight="600" fill="#172129">Vinayak Thanish</text>
-  <text x="70" y="186" font-family="Arial,sans-serif" font-size="14" letter-spacing="2" fill="#606d76">EDUCATION / CONTENT / COMMUNICATIONS</text>
-  <text x="67" y="292" font-family="Arial,sans-serif" font-size="88" letter-spacing="-5" fill="#172129">AI integration.</text>
-  <text x="67" y="394" font-family="Georgia,serif" font-style="italic" font-size="87" letter-spacing="-4" fill="#3156df">Human direction.</text>
-  <text x="70" y="483" font-family="Arial,sans-serif" font-size="20" fill="#606d76">Connecting people, learning and practical AI adoption.</text>
-  <g transform="translate(913 315)" fill="none"><circle r="128" stroke="#d8dde0"/><circle r="83" stroke="#d8dde0"/><path d="M0-155V155M-155 0H155" stroke="#d8dde0"/><path d="M-90-90A128 128 0 0 1 90 90" stroke="#68806d" stroke-width="2"/><circle r="45" fill="#14283b"/><g fill="#f4f3ed" transform="translate(-40 -40)"><path d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"/><path d="M45 15H71V23H61V49H53V23H44L45 15Z"/><circle cx="57" cy="61" r="4.5"/></g><circle cx="-90" cy="-90" r="5" fill="#3156df"/></g>
-  <text x="70" y="585" font-family="Arial,sans-serif" font-size="14" fill="#606d76">INDIA ↔ INTERNATIONAL</text>
-  <text x="1130" y="585" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#14283b">A CONNECTED PRACTICE</text>
+  <rect width="1200" height="630" fill="#18231f"/>
+  <path d="M70 114H1130M70 542H1130" stroke="#566156"/>
+  <g fill="#eee7d8" transform="translate(59 26) scale(.9)"><path d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"/><path d="M45 15H71V23H61V49H53V23H44L45 15Z"/><path d="M64.1 56.7a8.3 8.3 0 1 1-11.4-2.8" fill="none" stroke="#c5a36d" stroke-width="1.2" stroke-linecap="round"/><circle cx="57" cy="61" r="3.5" fill="#c5a36d"/></g>
+  <text x="148" y="76" font-family="Arial,sans-serif" font-size="23" font-weight="600" fill="#eee7d8">Vinayak Thanish</text>
+  <text x="70" y="186" font-family="Arial,sans-serif" font-size="14" letter-spacing="2" fill="#bdb8a9">EDUCATION / CONTENT / COMMUNICATIONS</text>
+  <text x="67" y="292" font-family="Arial,sans-serif" font-size="88" letter-spacing="-5" fill="#eee7d8">AI integration.</text>
+  <text x="67" y="394" font-family="Georgia,serif" font-style="italic" font-size="87" letter-spacing="-4" fill="#c5a36d">Human direction.</text>
+  <text x="70" y="483" font-family="Arial,sans-serif" font-size="20" fill="#bdb8a9">Connecting people, learning and practical AI adoption.</text>
+  <g transform="translate(933 315)" fill="none">
+    <path d="M-135 160V-30a135 135 0 0 1 270 0v190M-110 160V-30a110 110 0 0 1 220 0v190M-85 160V-30a85 85 0 0 1 170 0v190" stroke="#eee7d8" stroke-opacity=".18"/>
+    <path d="M0-170V170M-160 98H160M-160-30H160" stroke="#eee7d8" stroke-opacity=".12"/>
+    <circle cy="-30" r="58" stroke="#c5a36d" stroke-opacity=".65"/>
+    <path d="M-41-71a58 58 0 0 1 82 82" stroke="#c5a36d" stroke-width="2"/>
+    <circle cy="-30" r="29" fill="#c5a36d"/>
+    <path d="M0-59V-1M-29-30H29" stroke="#18231f" stroke-width="1"/>
+    <circle cy="-30" r="6" fill="#18231f"/>
+    <path d="M0 28V98M0 98-76 153M0 98 76 153" stroke="#c5a36d" stroke-opacity=".7"/>
+    <circle cy="98" r="4" fill="#eee7d8"/>
+    <circle cx="-76" cy="153" r="3" fill="#c5a36d"/>
+    <circle cx="76" cy="153" r="3" fill="#c5a36d"/>
+    <path d="M-153-102H-141M-147-108V-96M141 98H153M147 92V104" stroke="#c5a36d"/>
+  </g>
+  <text x="70" y="585" font-family="Arial,sans-serif" font-size="14" fill="#bdb8a9">INDIA ↔ INTERNATIONAL</text>
+  <text x="1130" y="585" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#eee7d8">A CONNECTED PRACTICE</text>
 </svg>

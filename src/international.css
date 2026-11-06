@@ -1,5 +1,5 @@
 @layer components {
-  .international-section { padding: 100px 0 84px; border-bottom: 1px solid var(--line); background: #fff; color: var(--ink); }
+  .international-section { padding: 100px 0 84px; border-bottom: 1px solid var(--line); background: #e4e1d4; color: var(--ink); }
   .international-container { min-width: 0; }
   .international-kicker { color: var(--muted); font: 11px/1.8 var(--mono); letter-spacing: 1.1px; }
   .international-heading { display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 64px; margin-top: 25px; }
@@ -7,7 +7,7 @@
   .international-heading h2 em { color: var(--moss); font-family: Georgia, serif; font-weight: 400; letter-spacing: -1.9px; }
   .international-heading > p { max-width: 440px; padding-bottom: 3px; color: var(--muted); font-size: 14px; line-height: 1.9; }
   .international-areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; margin-top: 42px; }
-  .international-area { min-width: 0; padding: 25px 26px 29px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); }
+  .international-area { min-width: 0; padding: 25px 26px 29px; border: 1px solid var(--line); border-radius: 2px; background: #faf7ef; box-shadow: inset 0 3px 0 var(--moss); }
   .international-area-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
   .international-index { padding-top: 7px; color: var(--accent); font: 11px/1.8 var(--mono); letter-spacing: .6px; }
   .international-mark { flex-shrink: 0; width: 61px; height: 61px; color: var(--moss); }
