@@ -1,6 +1,7 @@
 @layer reset, base, components, responsive;
 
 @font-face { font-family:'Manrope Variable'; font-style:normal; font-weight:200 800; font-display:swap; src:url('@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family:'Yatra One'; font-style:normal; font-weight:400; font-display:swap; src:url('@fontsource/yatra-one/files/yatra-one-latin-400-normal.woff2') format('woff2'); }
 
 @layer reset {
   *,*::before,*::after { box-sizing:border-box; }

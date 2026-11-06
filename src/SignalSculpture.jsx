@@ -43,6 +43,7 @@ export default function SignalSculpture({ lensId = 'adoption', motion = true }) 
           <linearGradient id={`${gradientId}-axis`} x1="50" y1="440" x2="470" y2="440" gradientUnits="userSpaceOnUse"><stop stopColor="#c5a36d" stopOpacity="0" /><stop offset=".5" stopColor="#c5a36d" stopOpacity=".4" /><stop offset="1" stopColor="#c5a36d" stopOpacity="0" /></linearGradient>
         </defs>
         <ellipse cx="260" cy="225" rx="245" ry="205" fill={`url(#${gradientId}-glow)`} />
+        <g className="signal-enduring-construction" stroke="#c5a36d" fill="none"><circle cx="260" cy="240" r="182" /><circle cx="260" cy="240" r="193" /><path d="M50 367h17v-17h17v-17h17v-17h17M402 316h17v17h17v17h17v17h17" /><path d="M260 42v25m-8-13h16M58 240h22m360 0h22" /></g>
         <g stroke="#b6bda6" strokeWidth=".7" opacity=".19"><path d="M25 130V66h64M431 66h64v64M25 365v64h64M431 429h64v-64" /><path d="M18 248h14m456 0h14M260 45v13m0 381v13" /></g>
         <ellipse cx="260" cy="433" rx="185" ry="28" fill={`url(#${gradientId}-shadow)`} />
         <path d="M42 442h436" stroke={`url(#${gradientId}-axis)`} strokeWidth="1" />

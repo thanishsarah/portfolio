@@ -2,6 +2,7 @@
   .signal-sculpture { position:relative; width:100%; max-width:540px; margin:0 auto; min-width:0; isolation:isolate; }
   .signal-surface { width:100%; transform-origin:50% 50%; transition:transform 280ms ease-out; }
   .signal-surface > svg { display:block; width:100%; height:auto; overflow:visible; }
+  .signal-enduring-construction { opacity:.14; stroke-width:.6; }
   .signal-caption { display:grid; grid-template-columns:auto minmax(20px,1fr) auto; gap:10px 15px; align-items:center; padding:0 24px; color:#bbbdaa; font:9px/1.8 var(--mono); letter-spacing:1.2px; }
   .signal-caption-rule { display:block; height:1px; background:linear-gradient(90deg,#c5a36d70,#c5a36d12); }
   .signal-caption > span:last-of-type { color:#d0b383; }

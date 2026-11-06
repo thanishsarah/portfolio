@@ -6,7 +6,8 @@ import { practiceLenses } from './practice-model.js';
 const sections = [
   { target: 'practice', label: 'The connected practice', detail: 'Choose a challenge and follow its relationships.', keywords: 'challenge learning adoption communication atlas' },
   { target: 'work', label: 'The work accounts', detail: 'Responsibility, contribution, scope, and public context.', keywords: 'cases projects evidence experience portfolio' },
-  { target: 'decision-studio', label: 'The decision workbench', detail: 'Inspect the choices behind an illustrative communication workflow.', keywords: 'judgement review draft approval system workflow example' },
+  { target: 'decision-studio', label: 'The connection game', detail: 'Rotate paths to connect human intention with learning, communication, and AI.', keywords: 'play puzzle gaming game algorithm graph judgement connection system' },
+  { target: 'design-notes', label: 'Ancient architecture & enduring ideas', detail: 'Original studies of Chand Baori, Sanchi, and Indra’s net.', keywords: 'stepwell architecture ancient knowledge myth philosophy vedic geometry design' },
   { target: 'ai-integration', label: 'The current AI remit', detail: 'Four connected workstreams and the decisions people own.', keywords: 'artificial intelligence content creation brand promotion business' },
   { target: 'curriculum', label: 'The public curriculum index', detail: 'Ten public overviews of connected learning strands.', keywords: 'teaching educator programme lessons learning topics' },
   { target: 'international', label: 'International perspectives', detail: 'Frameworks, inquiry, and school communication.', keywords: 'IB aligned personalised learning global international' },
