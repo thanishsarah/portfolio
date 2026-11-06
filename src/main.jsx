@@ -87,10 +87,19 @@ function ProjectDialog({ project, onClose }) {
     return () => { element.close(); document.body.style.overflow = previous; };
   }, []);
   function dismiss() { dialog.current.close(); onClose(); }
+  const projectLinks = project.links || (project.url ? [{ label: 'Visit project', url: project.url }] : []);
   return <dialog ref={dialog} className="project-dialog" aria-labelledby="project-title" onCancel={event => { event.preventDefault(); dismiss(); }} onClick={event => { if (event.target === event.currentTarget) dismiss(); }}>
     <button className="close-dialog" onClick={dismiss} aria-label="Close project details"><span aria-hidden="true">×</span></button>
     <div className={`dialog-art artwork-${project.kind}`}><ProjectArtwork kind={project.kind} /></div>
-    <div className="dialog-content"><p className="eyebrow">FIELD NOTE / {project.category}</p><h2 id="project-title">{project.title}</h2><p>{project.details}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>{project.url && <a className="text-link" href={project.url} target="_blank" rel="noreferrer">Visit project <Arrow diagonal /></a>}<p className="dialog-caption">Illustration created for this portfolio.</p></div>
+    <div className="dialog-content">
+      <p className="eyebrow">FIELD NOTE / {project.category}</p>
+      <h2 id="project-title">{project.title}</h2>
+      {project.role && <div className="project-role"><span>ROLE</span><p>{project.role}</p></div>}
+      <p>{project.details}</p>
+      <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+      {projectLinks.length > 0 && <div className="project-related-links">{projectLinks.map(link => <a className="text-link" key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.label} <Arrow diagonal /></a>)}</div>}
+      <p className="dialog-caption">Illustration created for this portfolio.</p>
+    </div>
   </dialog>;
 }
 
@@ -163,7 +172,7 @@ function App() {
       <section id="work" className="work-section light-section" aria-labelledby="work-title"><div className="container">
         <div className="section-heading"><div><p className="eyebrow">01 / SELECTED FIELD NOTES</p><h2 id="work-title">Ideas are just the start.<br /><em>Here’s what takes shape.</em></h2></div><p>Curriculum. Critical thinking. Connection.<br />A selection of work in education.</p></div>
         <div className="work-toolbar"><div className="filters" role="group" aria-label="Filter projects">{categories.map(category => <button key={category} className={`filter${filter === category ? ' active' : ''}`} aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}</button>)}</div><span className="project-count" role="status">{String(filtered.length).padStart(2, '0')} INITIATIVES</span></div>
-        <div className="project-grid">{filtered.map((project, index) => <article className={`project-card${index === 0 ? ' project-card-featured' : ''}`} key={project.id}>
+        <div className="project-grid">{filtered.map((project, index) => <article className={`project-card${index === 0 || project.featured ? ' project-card-featured' : ''}`} key={project.id} id={project.id}>
           <div className={`project-image artwork-${project.kind}`}><ProjectArtwork kind={project.kind} /><span className="art-caption">{project.artworkLabel || 'Project illustration'}</span></div>
           <div className="project-content"><p className="project-category"><span>{String(projects.indexOf(project) + 1).padStart(2, '0')}</span> / {project.category}</p><h3>{project.title}</h3><p className="project-description" id={`${project.id}-description`}>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><button className="project-open" aria-label={`View ${project.title} project details`} aria-describedby={`${project.id}-description`} onClick={event => openProject(project, event.currentTarget)}>Explore the initiative <span><Arrow diagonal /></span></button></div>
         </article>)}</div>

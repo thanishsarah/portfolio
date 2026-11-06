@@ -17,7 +17,55 @@ export default function ProjectArtwork({ kind }) {
       aria-hidden="true"
       focusable="false"
     >
-      {kind === 'design' ? (
+      {kind === 'programme' ? (
+        <>
+          <rect width="600" height="420" fill={forest} />
+          <path d="M40 65H560M40 355H560" stroke={cream} strokeOpacity=".23" />
+          <text x="40" y="46" fill={cream} fontFamily={mono} fontSize="9" letterSpacing="1.1">PROGRAMME LEADERSHIP</text>
+          <path d="M540 39H554M547 32V46" stroke={lime} strokeWidth="1.1" />
+
+          <path d="M65 108V324M535 108V324" stroke={cream} strokeOpacity=".15" strokeWidth=".7" />
+          <path d="M59 108H71M59 216H71M59 324H71M529 108H541M529 216H541M529 324H541" stroke={cream} strokeOpacity=".35" strokeWidth=".7" />
+          <circle cx="300" cy="210" r="133" stroke={cream} strokeOpacity=".18" strokeWidth=".8" strokeDasharray="2 6" />
+
+          <ellipse cx="300" cy="278" rx="180" ry="65" stroke={cream} strokeOpacity=".55" strokeWidth="1.1" />
+          <ellipse cx="300" cy="278" rx="137" ry="45" stroke={lime} strokeOpacity=".32" strokeWidth=".8" />
+          <g stroke={cream} strokeOpacity=".3" strokeWidth=".8">
+            <path d="M300 278 120 278M300 278 171 324M300 278 300 343M300 278 429 324M300 278 480 278" />
+            <path d="M300 278 145 245M300 278 455 245" />
+          </g>
+
+          <ellipse cx="254" cy="171" rx="42" ry="61" transform="rotate(-40 254 171)" fill={lime} stroke={forest} strokeWidth="1.2" />
+          <ellipse cx="346" cy="171" rx="42" ry="61" transform="rotate(40 346 171)" fill={lime} stroke={forest} strokeWidth="1.2" />
+          <ellipse cx="300" cy="146" rx="43" ry="62" fill={lime} stroke={forest} strokeWidth="1.2" />
+          <path d="M300 103V208M300 208 247 152M300 208 353 152M300 165 278 142M300 165 322 142" stroke={forest} strokeWidth="1.15" />
+          <path d="M300 207V275M277 220 300 242 323 220" stroke={cream} strokeWidth="1.8" />
+
+          <g fill={forest} stroke={cream} strokeWidth="1.1">
+            <circle cx="120" cy="278" r="12" />
+            <circle cx="171" cy="324" r="12" />
+            <circle cx="300" cy="343" r="12" />
+            <circle cx="429" cy="324" r="12" />
+            <circle cx="480" cy="278" r="12" />
+            <circle cx="145" cy="245" r="9" />
+            <circle cx="455" cy="245" r="9" />
+          </g>
+          <g fill={lime}>
+            <circle cx="120" cy="278" r="3" />
+            <circle cx="171" cy="324" r="3" />
+            <circle cx="300" cy="343" r="3" />
+            <circle cx="429" cy="324" r="3" />
+            <circle cx="480" cy="278" r="3" />
+          </g>
+          <circle cx="300" cy="278" r="20" fill={forest} stroke={lime} strokeWidth="1.2" />
+          <path d="M291 282c0-9 9-14 18-14 0 9-5 18-14 18M295 282l9-9" fill={lime} stroke={forest} strokeWidth="1" />
+          <circle cx="394" cy="112" r="3" fill={rust} />
+          <circle cx="205" cy="100" r="2" fill={cream} />
+
+          <text x="40" y="383" fill={cream} fontFamily={mono} fontSize="8.5" letterSpacing="1">PARYAVARAN BAAL SANSAD</text>
+          <text x="560" y="383" textAnchor="end" fill={lime} fontFamily={mono} fontSize="8" letterSpacing=".7">LED &amp; DIRECTED</text>
+        </>
+      ) : kind === 'design' ? (
         <>
           <rect width="600" height="420" fill={cream} />
           <path d="M40 65H560M40 355H560" stroke={forest} strokeOpacity=".18" />

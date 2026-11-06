@@ -238,6 +238,10 @@
   .dialog-content h2 { font-size: 38px; font-weight: 400; letter-spacing: -1.4px; line-height: 1.15; margin-top: 15px; }
   .dialog-content > p:not(.eyebrow):not(.dialog-caption) { color: var(--muted-dark); font-size: 14px; line-height: 1.95; margin-top: 21px; }
   .dialog-content .dialog-caption { color: var(--muted-dark); font: 7px var(--mono); text-transform: uppercase; letter-spacing: .5px; margin-top: 25px; }
+  .project-role { margin-top: 20px; padding: 14px 0; border-block: 1px solid var(--light-line); }
+  .project-role > span { color: var(--muted-dark); font: 7px/1.8 var(--mono); letter-spacing: 1px; }
+  .project-role > p { color: var(--forest); font-size: 13px; line-height: 1.7; margin-top: 5px; }
+  .project-related-links { display: flex; flex-wrap: wrap; gap: 0 26px; }
   .text-link { display: inline-flex; align-items: center; gap: 17px; font-size: 12px; text-decoration: underline; text-underline-offset: 5px; margin-top: 23px; }
   [data-motion='on'] section.has-entered > .container > .section-heading, [data-motion='on'] section.has-entered .journey-intro > .eyebrow { animation: section-arrive .7s ease-out; }
   [data-motion='off'] *, [data-motion='off'] *::before, [data-motion='off'] *::after { animation: none !important; transition: none !important; scroll-behavior: auto; }

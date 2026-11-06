@@ -48,6 +48,24 @@ export const projects = [
     artworkLabel: 'Project illustration',
     url: '',
   },
+  {
+    id: 'paryavaran-baal-sansad',
+    title: 'Paryavaran Baal Sansad',
+    category: 'Leadership',
+    kind: 'programme',
+    description: 'Led and directed the Paryavaran Baal Sansad programme.',
+    details: 'I led and directed Paryavaran Baal Sansad, bringing programme leadership into my wider work in education. Explore the programme through its website and Instagram page below.',
+    role: 'Programme leadership & direction',
+    tags: ['Programme leadership', 'Direction'],
+    sample: false,
+    featured: true,
+    artworkLabel: 'Programme illustration',
+    url: 'https://www.rpbs.in/',
+    links: [
+      { label: 'Programme website', url: 'https://www.rpbs.in/' },
+      { label: 'Instagram page', url: 'https://www.instagram.com/paryavaran_baal_sansad/' },
+    ],
+  },
 ];
 
 export const experience = [
