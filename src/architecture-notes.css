@@ -25,7 +25,7 @@
   .architecture-study h3 { font:400 31px/1.2 var(--display,Georgia,serif); letter-spacing:-.25px; }
   .architecture-place { color:#6b715f; font:9px/1.8 var(--mono); margin-top:9px; }
   .architecture-description { color:#59604f; font-size:12px; line-height:1.95; margin-top:18px; }
-  .architecture-principle { font-family:Georgia,'Times New Roman',serif; font-size:19px; font-style:italic; line-height:1.5; color:#52634f; padding:18px 0 20px; }
+  .architecture-principle { font-family:var(--display); font-size:19px; font-style:italic; line-height:1.5; color:#52634f; padding:18px 0 20px; }
   .architecture-source { margin-top:auto; display:flex; gap:14px; justify-content:space-between; align-items:center; min-height:47px; font:8px/1.9 var(--mono); color:#6d5c3e; border-top:1px solid var(--line); padding-block:10px; }
   .architecture-source > svg { flex-shrink:0; width:14px; height:14px; }
   .architecture-source:hover > span { text-decoration:underline; text-underline-offset:4px; }
