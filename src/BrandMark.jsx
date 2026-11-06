@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * The VT Pathway mark: an open V shares its rising arm with the T's canopy.
- * A detached seed completes the T. Its open ring gives the next connection room to grow.
+ * The VT Assembly mark joins a structural T with a converging V.
+ * The small facet marks the handoff; the open interval keeps the two forms legible.
  */
 export default function BrandMark({ className = '', ...props }) {
   return (
@@ -14,13 +14,9 @@ export default function BrandMark({ className = '', ...props }) {
       focusable="false"
       {...props}
     >
-      <path
-        d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"
-        fill="currentColor"
-      />
-      <path d="M45 15H71V23H61V49H53V23H44L45 15Z" fill="currentColor" />
-      <path d="M64.1 56.7a8.3 8.3 0 1 1-11.4-2.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-      <circle className="brand-seed" cx="57" cy="61" r="3.5" fill="currentColor" />
+      <path className="brand-beam" d="M10 12H70V24H46V45H34V24H10Z" fill="currentColor" />
+      <path className="brand-convergence" d="M8 32H22L40 59L58 32H72L46 70H34Z" fill="currentColor" />
+      <path className="brand-junction" d="M34 45H46L40 53Z" fill="var(--brand-accent, #c5a36d)" />
     </svg>
   );
 }

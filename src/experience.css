@@ -215,3 +215,17 @@
   }
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
 }
+
+@layer components {
+  .header-tools { display:flex; gap:14px; align-items:center; flex-shrink:0; }
+  .experience-header { gap:22px; }
+  .experience-navigation { margin-left:auto; gap:21px; }
+  .career-highlights { margin:15px 0 0; padding-left:16px; }
+  .career-highlights li + li { margin-top:9px; }
+}
+@layer responsive {
+  @media(max-width:1180px) { .experience-header { gap:16px; }.experience-navigation { gap:15px; }.experience-navigation .header-contact { gap:10px; font-size:10px; }.header-tools { gap:10px; } }
+  @media(max-width:980px) { .header-tools { margin-left:auto; gap:12px; }.experience-navigation { margin-left:0; } }
+  @media(max-width:600px) { .experience-header { gap:8px; }.header-tools { gap:8px; }.experience-brand { gap:8px; }.experience-brand > svg { width:35px; height:35px; }.experience-brand > span { font-size:12px; }.experience-brand small { font-size:5.5px; }.experience-menu { gap:13px; padding-inline:10px; } }
+  @media(max-width:370px) { .experience-brand > svg { width:30px; height:30px; }.experience-brand > span { font-size:11px; }.experience-brand small { font-size:5px; }.experience-menu { gap:10px; font-size:10px; }.header-tools { gap:5px; }.portfolio-search-trigger { width:35px; } }
+}

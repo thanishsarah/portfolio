@@ -73,6 +73,11 @@ export default function CurriculumShowcase() {
   const [selected, setSelected] = useState(null);
   const trigger = useRef(null);
   const search = useRef(null);
+  useEffect(() => {
+    const change = event => { if (typeof event.detail === 'string') { setCategory('All'); setQuery(event.detail.slice(0, 120)); } };
+    addEventListener('portfolio:curriculum-search', change);
+    return () => removeEventListener('portfolio:curriculum-search', change);
+  }, []);
   const categories = ['All', ...new Set(publicCurricula.map(item => item.category))];
   const searchTerm = query.trim().toLocaleLowerCase();
   const results = publicCurricula.filter(item => {

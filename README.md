@@ -6,13 +6,13 @@ A leadership-first React portfolio positioning Vinayak Thanish around AI integra
 
 The portfolio connects a visitor’s challenge, relevant experience, an inspectable editorial decision, and a contextual conversation. The three practice lenses in `src/practice-model.js` share state with the case explorer and conversation brief. Case narratives distinguish current remit, experience, personal responsibility, working approach, and public organisational context.
 
-`src/DecisionStudio.jsx` is an original fictional communication review. Its three editorial choices change the draft and its hold state; the final state still requires human review. It uses fixed illustrative material, has no AI service or publication endpoint, and does not represent a delivered institutional workflow.
+`src/DecisionStudio.jsx` is an original fictional workflow workbench. A Web Worker evaluates deterministic editorial rules. Revision-bound results, explicit sample approval, local snapshots, cancellation, retirement, restoration, and replay are governed by the pure model in `src/workflow-engine.js`. Edits invalidate dependent work and approval; stale worker replies are ignored. The bounded session journal compacts older events into a replay checkpoint. Exported traces contain only the fictional example, and the checksum supports repeatability rather than authentication. There is no AI service or publication endpoint; this is a portfolio demonstration.
 
 Explored cases and the visitor’s optional challenge remain in page memory. The contact area previews the complete conversation brief before an explicit copy or email action. Reset clears the route and draft; reloading does not preserve them. No analytics, tracking, external font request, database, or API key is required. A persistent motion preference is the only local-storage setting.
 
 The curriculum and international overviews are supporting disclosures, with direct fragment links that reveal the relevant section. Curriculum search, filters, and native overview dialogs remain keyboard accessible. Formal résumé titles and qualifications remain intact.
 
-The VT Pathway mark, original project illustrations, and measured geometric field share the charcoal, warm stone, bronze, and mineral-green palette. Source vectors live in `public/` and `src/ProjectArtwork.jsx`. Manrope is self-hosted through Fontsource; its OFL license is in `public/licenses/manrope.txt`. Motion follows system preferences and the footer control.
+The VT Assembly mark, original project illustrations, and parametric ribbon sculpture share the charcoal, warm stone, bronze, and mineral-green palette. Source vectors live in `public/` and `src/ProjectArtwork.jsx`. Manrope is self-hosted through Fontsource; its OFL license is in `public/licenses/manrope.txt`. Motion follows system preferences and the footer control. The sculpture uses deterministic geometry and bounded pointer tilt without a render loop. Ctrl/Cmd+K opens a keyboard-accessible search of approved public content; topic selection reveals and filters the supporting index.
 
 ## Develop
 
@@ -33,6 +33,9 @@ The development server uses port 5173 by default. No API keys, database, or back
 - `src/ai-practice.js`: current AI remit and workstreams.
 - `src/curriculum.js` and `src/international.js`: public educational overviews.
 - `src/decision-studio.js`: the original fictional review example.
+- `src/workflow-engine.js` and `src/workflow.worker.js`: deterministic lifecycle, dependency validation, rule execution, and replay.
+- `src/portfolio-search.js`: the public search index and ranking.
+- `src/signal-geometry.js`: parametric sculpture geometry.
 - `src/experience.css`: global design rules and shell; feature styles live beside their components.
 
 Update the description and theme color in `index.html` as needed. Personal source documents, phone number, date of birth, and confidential originals are excluded from the website.
