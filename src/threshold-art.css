@@ -1,0 +1,286 @@
+@layer components {
+  .threshold-art {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-width: 0;
+    margin: 0 auto;
+    color: #ece3cf;
+    isolation: isolate;
+  }
+  .threshold-art-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 9px 16px;
+    font: 8px/1.7 var(--mono, ui-monospace, monospace);
+    letter-spacing: 1.15px;
+    color: #b4b7a4;
+    border-bottom: 1px solid #b48b6536;
+  }
+  .threshold-art-topline > span:last-child {
+    color: #c7a77d;
+  }
+  .threshold-surface {
+    position: relative;
+    transform-origin: 50% 53%;
+    transition: transform 420ms cubic-bezier(0.2, 0.6, 0.3, 1);
+    --threshold-x: 50%;
+    --threshold-y: 40%;
+  }
+  .threshold-drawing {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .threshold-datum {
+    stroke: #b48b65;
+    stroke-width: 0.65;
+    opacity: 0.25;
+  }
+  .threshold-measure {
+    stroke: #b48b65;
+    stroke-width: 0.6;
+    opacity: 0.35;
+  }
+  .threshold-floor-grid {
+    stroke: #899375;
+    stroke-width: 0.5;
+    opacity: 0.14;
+  }
+  .threshold-veins {
+    stroke: #242f25;
+    stroke-width: 0.5;
+    opacity: 0.17;
+  }
+  .threshold-inscription {
+    stroke: #dfc28b;
+    stroke-width: 0.75;
+    fill: none;
+    opacity: 0.3;
+  }
+  .threshold-lintel {
+    stroke: #dfc28b;
+    stroke-width: 0.7;
+    opacity: 0.38;
+  }
+  .threshold-focus-mark {
+    fill: none;
+    opacity: 0.88;
+  }
+  .threshold-human {
+    fill: #c6b48d;
+    stroke: #c6b48d;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .threshold-dust {
+    fill: #dfc28b;
+    opacity: 0.4;
+  }
+  .threshold-dust > circle {
+    opacity: 0.45;
+  }
+  .threshold-notation {
+    stroke: #b48b65;
+    stroke-width: 0.55;
+    opacity: 0.45;
+  }
+  .threshold-pointer-light {
+    position: absolute;
+    inset: 5% 0 4%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--threshold-x) var(--threshold-y),
+      #e2bd7512,
+      transparent 46%
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .threshold-art:hover .threshold-pointer-light {
+    opacity: 1;
+  }
+  .threshold-caption {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #b48b6536;
+    padding: 20px 8px 0;
+    min-height: 67px;
+  }
+  .threshold-caption-number {
+    font: 9px/1.8 var(--mono, ui-monospace, monospace);
+    letter-spacing: 1px;
+    color: #c7a77d;
+    align-self: flex-start;
+    padding-top: 1px;
+  }
+  .threshold-caption > span:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+  }
+  .threshold-caption strong {
+    font: 500 12px/1.5 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #e8dfcb;
+  }
+  .threshold-caption > span > span {
+    font: 10px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #a8b19e;
+  }
+  .threshold-caption > svg {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    margin-left: auto;
+    color: #c7a77d;
+  }
+  .threshold-art[data-motion="on"] .threshold-beam {
+    animation: threshold-light 11s ease-in-out infinite alternate;
+  }
+  .threshold-art[data-motion="on"] .threshold-inner-light {
+    animation: threshold-inner-light 9s ease-in-out infinite alternate;
+  }
+  .threshold-art[data-motion="on"] .threshold-dust > circle {
+    animation: threshold-dust 8s ease-in-out infinite;
+    animation-delay: var(--dust-delay);
+  }
+  .threshold-art[data-motion="on"] .threshold-focus-mark {
+    animation: threshold-inscribe 0.9s ease-out both;
+  }
+  .threshold-art[data-motion="off"] .threshold-surface {
+    transform: none !important;
+    transition: none;
+  }
+  .threshold-art[data-motion="off"] .threshold-pointer-light {
+    opacity: 0;
+  }
+  .threshold-art[data-focus="learning"] .threshold-focus-mark {
+    stroke: #bfc99a;
+  }
+  .threshold-art[data-focus="communication"] .threshold-focus-mark {
+    stroke: #d1a688;
+  }
+  @keyframes threshold-light {
+    from {
+      opacity: 0.45;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes threshold-inner-light {
+    from {
+      opacity: 0.48;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes threshold-dust {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.55;
+    }
+    75% {
+      opacity: 0.3;
+    }
+    90% {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+  }
+  @keyframes threshold-inscribe {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 0.88;
+      transform: translateY(0);
+    }
+  }
+}
+@layer responsive {
+  @media (max-width: 1100px) {
+    .threshold-art-topline {
+      font-size: 7px;
+      letter-spacing: 0.7px;
+      padding-bottom: 14px;
+    }
+    .threshold-caption {
+      gap: 12px;
+      padding-top: 17px;
+    }
+    .threshold-caption strong {
+      font-size: 11px;
+    }
+    .threshold-caption > span > span {
+      font-size: 9px;
+    }
+  }
+  @media (max-width: 760px) {
+    .threshold-art {
+      max-width: 500px;
+    }
+    .threshold-art-topline {
+      font-size: 8px;
+      letter-spacing: 1px;
+      padding-inline: 4px;
+    }
+    .threshold-caption {
+      padding-inline: 4px;
+    }
+    .threshold-caption strong {
+      font-size: 12px;
+    }
+    .threshold-caption > span > span {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 370px) {
+    .threshold-art-topline {
+      font-size: 6.5px;
+      letter-spacing: 0.7px;
+    }
+    .threshold-caption {
+      gap: 10px;
+      padding-top: 15px;
+    }
+    .threshold-caption strong {
+      font-size: 11px;
+    }
+    .threshold-caption > span > span {
+      font-size: 9px;
+    }
+    .threshold-caption > svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .threshold-art .threshold-surface {
+      transform: none !important;
+      transition: none;
+    }
+    .threshold-art .threshold-beam,
+    .threshold-art .threshold-inner-light,
+    .threshold-art .threshold-dust > circle,
+    .threshold-art .threshold-focus-mark {
+      animation: none !important;
+    }
+    .threshold-art .threshold-pointer-light {
+      display: none;
+    }
+  }
+}

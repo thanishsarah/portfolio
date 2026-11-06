@@ -4,9 +4,9 @@ import { internationalPractice } from './international.js';
 import { practiceLenses } from './practice-model.js';
 
 const sections = [
-  { target: 'practice', label: 'The connected practice', detail: 'Choose a challenge and follow its relationships.', keywords: 'challenge learning adoption communication atlas' },
+  { target: 'practice', label: 'The connected practice', detail: 'Explore the current AI integration remit and human decisions behind four workstreams.', keywords: 'challenge learning adoption communication practice' },
   { target: 'work', label: 'The work accounts', detail: 'Responsibility, contribution, scope, and public context.', keywords: 'cases projects evidence experience portfolio' },
-  { target: 'decision-studio', label: 'The connection game', detail: 'Rotate paths to connect human intention with learning, communication, and AI.', keywords: 'play puzzle gaming game algorithm graph judgement connection system' },
+  { target: 'decision-studio', label: 'The ancient game room', detail: 'Play a modern Royal Game of Ur against the Archivist.', keywords: 'play ancient ur mesopotamia strategy gaming game algorithm probability dice rosettes race' },
   { target: 'design-notes', label: 'Ancient architecture & enduring ideas', detail: 'Original studies of Chand Baori, Sanchi, and Indra’s net.', keywords: 'stepwell architecture ancient knowledge myth philosophy vedic geometry design' },
   { target: 'ai-integration', label: 'The current AI remit', detail: 'Four connected workstreams and the decisions people own.', keywords: 'artificial intelligence content creation brand promotion business' },
   { target: 'curriculum', label: 'The public curriculum index', detail: 'Ten public overviews of connected learning strands.', keywords: 'teaching educator programme lessons learning topics' },

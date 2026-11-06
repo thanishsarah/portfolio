@@ -47,7 +47,7 @@ export function buildConversationBrief({ lensId, caseTitles = [], intent = 'lead
   const lines = ['Hello Vinayak,', '', `I would like to discuss ${purpose}.`, '', `Focus: ${lens.title}.`];
   if (challenge.trim()) lines.push(`The challenge: ${challenge.trim()}`);
   if (caseTitles.length) lines.push(`Work I explored: ${caseTitles.join('; ')}.`);
-  if (demoSeen) lines.push('I also explored the connection game about learning, communication, and AI.');
+  if (demoSeen) lines.push('I also explored the ancient strategy game in your atelier.');
   lines.push('', 'Organisation / team:', 'Location / working arrangement:', 'A useful next conversation would be:');
   return lines.join('\n');
 }

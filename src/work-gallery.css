@@ -1,0 +1,1036 @@
+@layer components {
+  .work-gallery {
+    --wg-ink: #151a17;
+    --wg-paper: #ece3cf;
+    --wg-line: #c9bda5;
+    --wg-bronze: #9d7953;
+    --wg-clay: #a45b35;
+    background: #ece3cf;
+    color: #151a17;
+    padding: 92px 0 51px;
+  }
+  .wg-label {
+    color: #6c6c5d;
+    font: 9px/1.8 var(--mono, ui-monospace, monospace);
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+  }
+  .wg-section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.64fr);
+    align-items: end;
+    gap: 70px;
+  }
+  .wg-section-heading h2 {
+    font: 400 clamp(45px, 4.65vw, 68px) / 1.02 var(--display, Georgia, serif);
+    letter-spacing: -1.6px;
+    margin: 23px 0 0;
+  }
+  .wg-section-heading h2 em {
+    font: inherit;
+    font-style: italic;
+    color: #6c785e;
+  }
+  .wg-section-heading > div:last-child {
+    max-width: 400px;
+    padding-bottom: 3px;
+  }
+  .wg-section-heading > div:last-child > p {
+    font: 14px/1.9 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #62685b;
+  }
+  .wg-section-heading > div:last-child > span {
+    display: block;
+    font: 8px/1.8 var(--mono, ui-monospace, monospace);
+    letter-spacing: 1px;
+    color: #8f7553;
+    margin-top: 25px;
+  }
+  .wg-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 25px;
+    margin-top: 41px;
+  }
+  .wg-panel {
+    position: relative;
+    min-width: 0;
+    grid-column: span 5;
+    display: flex;
+    flex-direction: column;
+    background: #f5eedd;
+    border: 1px solid #c8b99c;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .wg-panel-wide {
+    grid-column: span 7;
+    display: grid;
+    grid-template-columns: minmax(0, 1.13fr) minmax(0, 0.87fr);
+  }
+  .wg-panel:nth-child(4) {
+    grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+  }
+  .wg-panel-content {
+    position: relative;
+    z-index: 1;
+    padding: 24px 25px 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .wg-panel-wide .wg-panel-content {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 25px 25px 0;
+  }
+  .wg-panel:nth-child(4) .wg-panel-content {
+    grid-column: 2;
+  }
+  .wg-panel-art {
+    position: relative;
+    overflow: hidden;
+    background: #18231f;
+    min-width: 0;
+    height: 159px;
+    border-bottom: 1px solid #c8b99c;
+  }
+  .wg-panel-art .project-artwork {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: translateY(-18%);
+  }
+  .wg-panel-art .project-artwork text {
+    display: none;
+  }
+  .wg-panel-wide .wg-panel-art {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+    min-height: 397px;
+    border: 0;
+    border-left: 1px solid #a68b604d;
+  }
+  .wg-panel-wide .wg-panel-art .project-artwork {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.37);
+    transform-origin: center;
+  }
+  .wg-panel:nth-child(4) .wg-panel-art {
+    grid-column: 1;
+    border-left: 0;
+    border-right: 1px solid #a68b604d;
+  }
+  .wg-panel:nth-child(2) .wg-panel-art {
+    background: #eee7d8;
+  }
+  .wg-panel:nth-child(3) .wg-panel-art {
+    background: #52634f;
+  }
+  .wg-art-coordinate {
+    position: absolute;
+    bottom: 15px;
+    right: 17px;
+    font: 7px/1.8 var(--mono, ui-monospace, monospace);
+    color: #e9d8b7;
+    letter-spacing: 1px;
+    background: #18231fb3;
+    padding: 3px 6px;
+    border: 1px solid #c5a36d4d;
+  }
+  .wg-panel-topline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    color: #78664b;
+    font: 8px/1.6 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.5px;
+  }
+  .wg-panel-topline > span:last-child {
+    font-size: 10px;
+    color: #a8875e;
+  }
+  .wg-panel-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font: 8px/1.7 var(--mono, ui-monospace, monospace);
+    color: #68755b;
+    margin-top: 17px;
+  }
+  .wg-panel-status > span {
+    width: 4px;
+    height: 4px;
+    flex-shrink: 0;
+    background: #7b8d65;
+    border-radius: 50%;
+  }
+  .wg-panel h3 {
+    font: 400 clamp(26px, 2.4vw, 35px) / 1.12 var(--display, Georgia, serif);
+    letter-spacing: -0.65px;
+    margin: 14px 0 0;
+    max-width: 300px;
+  }
+  .wg-panel-wide h3 {
+    margin-top: 24px;
+    font-size: clamp(31px, 2.8vw, 40px);
+  }
+  .wg-panel-subtitle {
+    font: 600 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 16px 0 0;
+    color: #465144;
+  }
+  .wg-panel-description {
+    font: 11px/1.85 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 7px 0 22px;
+    color: #6b6d5e;
+  }
+  .wg-panel-open {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 0;
+    background: transparent;
+    color: #88502d;
+    border: 0;
+    border-top: 1px solid #d0c2a5;
+    text-align: left;
+    font: 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin-top: auto;
+  }
+  .wg-panel-open > svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .wg-panel-open:hover > svg {
+    transform: translate(2px, -2px);
+  }
+  .wg-panel-open:focus-visible {
+    outline: 2px solid #8c582f;
+    outline-offset: 3px;
+  }
+  .wg-panel.is-selected::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 2px;
+    background: #a3653d;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .wg-panel:focus-within {
+    border-color: #9a764c;
+  }
+  .wg-gallery-footnote {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 23px;
+    padding-top: 20px;
+    border-top: 1px solid #c5b79b;
+  }
+  .wg-gallery-footnote > span {
+    color: #9c784e;
+    font:
+      22px/1 Georgia,
+      serif;
+  }
+  .wg-gallery-footnote > p {
+    font: 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #6c6d5d;
+  }
+  .wg-gallery-footnote > a {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin-left: auto;
+    flex-shrink: 0;
+    font: 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #895333;
+    min-height: 42px;
+  }
+  .wg-gallery-footnote > a > svg {
+    width: 16px;
+    height: 16px;
+  }
+  .wg-dialog {
+    --wg-paper: #f4ecdb;
+    --wg-ink: #1b241c;
+    --wg-line: #cbbca0;
+    width: min(1030px, calc(100% - 64px));
+    max-width: 1030px;
+    height: min(900px, calc(100dvh - 64px));
+    max-height: calc(100dvh - 64px);
+    padding: 0;
+    border: 1px solid #bca37b;
+    background: var(--wg-paper);
+    color: var(--wg-ink);
+    box-shadow: 0 30px 120px #050d0780;
+    overflow: hidden;
+  }
+  .wg-dialog::backdrop {
+    background: #0a130fd4;
+    backdrop-filter: blur(5px);
+  }
+  .wg-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .wg-dialog-topline {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-shrink: 0;
+    padding: 16px 29px 15px;
+    border-bottom: 1px solid var(--wg-line);
+    color: #78694e;
+    background: #f4ecdb;
+    font: 8px/1.7 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.5px;
+  }
+  .wg-dialog-topline > span:nth-child(2) {
+    margin-left: auto;
+    color: #725b3d;
+  }
+  .wg-dialog-topline > button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 17px;
+    min-height: 38px;
+    padding: 7px 0 7px 15px;
+    border: 0;
+    border-left: 1px solid #c9bda4;
+    background: transparent;
+    font: 11px/1.7 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #3f4a3d;
+  }
+  .wg-dialog-topline > button > svg {
+    width: 18px;
+    height: 18px;
+  }
+  .wg-dialog-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 34px 47px 0;
+    scrollbar-color: #ae9771 #e9dfcb;
+    scrollbar-width: thin;
+  }
+  .wg-dialog-heading > .wg-label {
+    color: #91653f;
+  }
+  .wg-dialog-heading h2 {
+    font: 400 clamp(35px, 4vw, 52px) / 1.08 var(--display, Georgia, serif);
+    letter-spacing: -1px;
+    max-width: 720px;
+    margin: 18px 0 0;
+  }
+  .wg-dialog-heading > p:last-child {
+    font: 14px/1.9 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #616857;
+    max-width: 730px;
+    margin: 20px 0 0;
+  }
+  .wg-dialog-introduction {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 35px;
+    margin-top: 29px;
+    padding: 26px 0;
+    border-block: 1px solid var(--wg-line);
+  }
+  .wg-dialog-art {
+    min-width: 0;
+    align-self: center;
+  }
+  .wg-dialog-art .project-artwork {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #bca682;
+  }
+  .wg-dialog-art > span {
+    display: block;
+    font: 6px/1.8 var(--mono, ui-monospace, monospace);
+    color: #83816c;
+    letter-spacing: 0.7px;
+    margin-top: 9px;
+  }
+  .wg-dialog-remit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+  }
+  .wg-dialog-remit dt {
+    font: 8px/1.8 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.7px;
+    color: #85704f;
+  }
+  .wg-dialog-remit dd {
+    font: 12px/1.9 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 6px 0 0;
+  }
+  .wg-dialog-remit > div:last-child dd {
+    color: #626a58;
+  }
+  .wg-dialog-contribution {
+    padding: 26px 0 28px;
+  }
+  .wg-dialog-contribution > ul {
+    margin: 16px 0 0;
+    padding-left: 17px;
+  }
+  .wg-dialog-contribution li {
+    font: 13px/1.95 var(--body, "Manrope Variable", Arial, sans-serif);
+    padding-left: 5px;
+  }
+  .wg-dialog-contribution li + li {
+    margin-top: 10px;
+  }
+  .wg-dialog-contribution li::marker {
+    color: #a57644;
+  }
+  .wg-dialog-question {
+    padding: 25px 28px;
+    background: #e5d9c0;
+    border-left: 2px solid #a46b3e;
+  }
+  .wg-dialog-question > span {
+    font: 8px/1.8 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.6px;
+    color: #845b36;
+  }
+  .wg-dialog-question > p {
+    font: 400 27px/1.35 var(--display, Georgia, serif);
+    letter-spacing: -0.25px;
+    margin: 13px 0 0;
+    max-width: 740px;
+  }
+  .wg-dialog-human {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    padding: 27px 0;
+    border-bottom: 1px solid var(--wg-line);
+  }
+  .wg-dialog-human h3 {
+    font: 600 12px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 0;
+    color: #4c5a45;
+  }
+  .wg-dialog-human p {
+    font: 12px/1.95 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #636a58;
+    margin: 10px 0 0;
+  }
+  .wg-dialog-approach {
+    padding: 25px 0 28px;
+  }
+  .wg-dialog-approach ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 23px;
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+  }
+  .wg-dialog-approach li {
+    border-top: 1px solid var(--wg-line);
+    padding-top: 12px;
+    min-width: 0;
+  }
+  .wg-dialog-approach li > span {
+    font: 8px/1.8 var(--mono, ui-monospace, monospace);
+    color: #996c40;
+  }
+  .wg-dialog-approach li > p {
+    font: 12px/1.9 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 9px 0 0;
+  }
+  .wg-dialog-evidence {
+    background: #e2e3d2;
+    border: 1px solid #c3c7ae;
+    padding: 22px 25px;
+  }
+  .wg-evidence-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wg-evidence-heading > span {
+    display: block;
+    width: 5px;
+    height: 5px;
+    background: #75866b;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .wg-evidence-heading h3 {
+    font: 600 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 0;
+    color: #4e6146;
+  }
+  .wg-dialog-evidence > p {
+    font: 12px/1.9 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 9px 0 0;
+  }
+  .wg-dialog-evidence > p.wg-evidence-boundary {
+    font-size: 10px;
+    color: #606c54;
+  }
+  .wg-dialog-evidence > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 25px;
+    margin-top: 15px;
+  }
+  .wg-dialog-evidence a {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 38px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font: 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #7e4d2d;
+  }
+  .wg-dialog-evidence a > svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .wg-dialog-connections {
+    padding: 26px 0 20px;
+  }
+  .wg-dialog-connections > a {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--wg-line);
+  }
+  .wg-dialog-connections > a > span {
+    min-width: 0;
+  }
+  .wg-dialog-connections strong {
+    display: block;
+    font: 600 12px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+  }
+  .wg-dialog-connections > a > span > span {
+    display: block;
+    font: 11px/1.85 var(--body, "Manrope Variable", Arial, sans-serif);
+    color: #68705f;
+    margin-top: 4px;
+  }
+  .wg-dialog-connections svg {
+    width: 18px;
+    height: 18px;
+    color: #996b43;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .wg-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 12px 0 32px;
+  }
+  .wg-dialog-footer > div {
+    max-width: 500px;
+  }
+  .wg-dialog-footer > div > p:last-child {
+    font: 13px/1.85 var(--body, "Manrope Variable", Arial, sans-serif);
+    margin: 8px 0 0;
+    color: #4f5d47;
+  }
+  .wg-dialog-footer > button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 13px 17px;
+    background: #1b2a20;
+    color: #e9dfc8;
+    border: 1px solid #1b2a20;
+    font: 11px/1.8 var(--body, "Manrope Variable", Arial, sans-serif);
+    flex-shrink: 0;
+  }
+  .wg-dialog-footer > button > svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+  .work-gallery a:focus-visible,
+  .wg-dialog a:focus-visible,
+  .wg-dialog button:focus-visible {
+    outline: 2px solid #9e6c3e;
+    outline-offset: 4px;
+  }
+  [data-motion="off"] .wg-panel-open > svg {
+    transition: none;
+  }
+}
+
+@layer responsive {
+  @media (min-width: 1550px) {
+    .wg-panel-content {
+      padding-inline: 30px;
+    }
+    .wg-panel-wide .wg-panel-content {
+      padding-inline: 30px;
+    }
+  }
+  @media (max-width: 1180px) {
+    .wg-grid {
+      gap: 20px;
+    }
+    .wg-panel-wide {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    }
+    .wg-panel:nth-child(4) {
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    }
+    .wg-panel-content,
+    .wg-panel-wide .wg-panel-content {
+      padding: 22px 21px 0;
+    }
+    .wg-panel h3 {
+      font-size: 28px;
+    }
+    .wg-panel-wide h3 {
+      font-size: 34px;
+    }
+    .wg-panel-art {
+      height: 145px;
+    }
+    .wg-panel-topline {
+      font-size: 7px;
+      letter-spacing: 0.2px;
+    }
+    .wg-panel-wide .wg-panel-art .project-artwork {
+      transform: scale(1.6);
+    }
+    .wg-panel-description {
+      font-size: 10px;
+    }
+    .wg-panel-subtitle {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 980px) {
+    .work-gallery {
+      padding: 70px 0 43px;
+    }
+    .wg-section-heading {
+      grid-template-columns: 1fr 0.8fr;
+      gap: 40px;
+    }
+    .wg-section-heading h2 {
+      font-size: 50px;
+    }
+    .wg-section-heading > div:last-child > p {
+      font-size: 13px;
+    }
+    .wg-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 33px;
+    }
+    .wg-panel,
+    .wg-panel-wide {
+      grid-column: span 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .wg-panel-wide .wg-panel-content {
+      order: 2;
+    }
+    .wg-panel-wide .wg-panel-art {
+      height: 155px;
+      min-height: 0;
+      border-bottom: 1px solid #b9a883;
+      border-left: 0;
+    }
+    .wg-panel-art {
+      height: 155px;
+    }
+    .wg-panel-wide .wg-panel-art .project-artwork {
+      width: 100%;
+      height: auto;
+      transform: translateY(-18%);
+    }
+    .wg-panel:nth-child(4) .wg-panel-art {
+      border-right: 0;
+    }
+    .wg-panel h3,
+    .wg-panel-wide h3 {
+      font-size: 32px;
+      margin-top: 15px;
+    }
+    .wg-panel-content,
+    .wg-panel-wide .wg-panel-content {
+      flex: 1;
+      padding-top: 21px;
+    }
+    .wg-panel-status {
+      margin-top: 15px;
+    }
+    .wg-panel-description {
+      font-size: 11px;
+    }
+    .wg-panel-subtitle {
+      font-size: 11px;
+    }
+    .wg-gallery-footnote > p {
+      font-size: 10px;
+    }
+    .wg-dialog-scroll {
+      padding: 29px 34px 0;
+    }
+  }
+  @media (max-width: 760px) {
+    .work-gallery {
+      padding: 55px 0 32px;
+    }
+    .wg-section-heading {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .wg-section-heading h2 {
+      font-size: 44px;
+      letter-spacing: -1px;
+      margin-top: 18px;
+    }
+    .wg-section-heading > div:last-child {
+      max-width: 500px;
+    }
+    .wg-section-heading > div:last-child > span {
+      margin-top: 15px;
+    }
+    .wg-grid {
+      gap: 17px;
+      margin-top: 28px;
+    }
+    .wg-panel-content,
+    .wg-panel-wide .wg-panel-content {
+      padding: 19px 18px 0;
+    }
+    .wg-panel h3,
+    .wg-panel-wide h3 {
+      font-size: 29px;
+    }
+    .wg-panel-art,
+    .wg-panel-wide .wg-panel-art {
+      height: 137px;
+    }
+    .wg-panel-art .project-artwork,
+    .wg-panel-wide .wg-panel-art .project-artwork {
+      transform: translateY(-12%);
+    }
+    .wg-panel-subtitle {
+      font-size: 10px;
+    }
+    .wg-panel-description {
+      font-size: 10px;
+    }
+    .wg-panel-topline {
+      font-size: 6px;
+    }
+    .wg-panel-status {
+      font-size: 7px;
+    }
+    .wg-panel-open {
+      font-size: 10px;
+      min-height: 49px;
+    }
+    .wg-panel-open > svg {
+      width: 16px;
+      height: 16px;
+    }
+    .wg-gallery-footnote {
+      flex-wrap: wrap;
+      gap: 8px 12px;
+    }
+    .wg-gallery-footnote > p {
+      flex: 1;
+    }
+    .wg-gallery-footnote > a {
+      width: calc(100% - 27px);
+      margin-left: 27px;
+      font-size: 10px;
+    }
+    .wg-dialog {
+      width: calc(100% - 30px);
+      height: calc(100dvh - 30px);
+      max-height: calc(100dvh - 30px);
+    }
+    .wg-dialog-topline {
+      padding: 11px 20px;
+      gap: 15px;
+      font-size: 7px;
+    }
+    .wg-dialog-topline > span:nth-child(2) {
+      max-width: 140px;
+      text-align: right;
+    }
+    .wg-dialog-topline > button {
+      gap: 10px;
+      font-size: 10px;
+      padding-left: 13px;
+    }
+    .wg-dialog-scroll {
+      padding: 25px 25px 0;
+    }
+    .wg-dialog-heading h2 {
+      font-size: 37px;
+    }
+    .wg-dialog-heading > p:last-child {
+      font-size: 13px;
+    }
+    .wg-dialog-introduction {
+      gap: 25px;
+    }
+    .wg-dialog-remit {
+      gap: 16px;
+    }
+    .wg-dialog-remit dd {
+      font-size: 11px;
+    }
+    .wg-dialog-question > p {
+      font-size: 25px;
+    }
+    .wg-dialog-human {
+      gap: 25px;
+    }
+    .wg-dialog-approach ol {
+      gap: 17px;
+    }
+    .wg-dialog-approach li > p {
+      font-size: 11px;
+    }
+    .wg-dialog-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 560px) {
+    .wg-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .wg-panel,
+    .wg-panel-wide,
+    .wg-panel:nth-child(4) {
+      display: flex;
+      flex-direction: column;
+    }
+    .wg-panel-content,
+    .wg-panel-wide .wg-panel-content,
+    .wg-panel:nth-child(4) .wg-panel-content {
+      order: 2;
+      padding: 24px 22px 0;
+    }
+    .wg-panel-art,
+    .wg-panel-wide .wg-panel-art,
+    .wg-panel:nth-child(4) .wg-panel-art {
+      order: 1;
+      flex-shrink: 0;
+      height: 170px;
+      min-height: 170px;
+      border: 0;
+      border-bottom: 1px solid #c5b08b;
+    }
+    .wg-panel-art .project-artwork,
+    .wg-panel-wide .wg-panel-art .project-artwork {
+      width: 100%;
+      height: auto;
+      transform: translateY(-17%);
+    }
+    .wg-panel h3,
+    .wg-panel-wide h3 {
+      font-size: 36px;
+      line-height: 1.07;
+      margin-top: 17px;
+      max-width: none;
+    }
+    .wg-panel-subtitle {
+      font-size: 12px;
+      margin-top: 16px;
+    }
+    .wg-panel-description {
+      font-size: 12px;
+      line-height: 1.85;
+      margin-bottom: 21px;
+    }
+    .wg-panel-topline {
+      font-size: 8px;
+      gap: 12px;
+    }
+    .wg-panel-topline > span:last-child {
+      font-size: 10px;
+    }
+    .wg-panel-status {
+      font-size: 9px;
+      margin-top: 17px;
+    }
+    .wg-panel-open {
+      min-height: 53px;
+      font-size: 12px;
+    }
+    .wg-art-coordinate {
+      right: 14px;
+      bottom: 12px;
+      font-size: 7px;
+      padding: 3px 6px;
+    }
+    .wg-dialog-topline {
+      padding: 10px 15px;
+    }
+    .wg-dialog-topline > span:nth-child(2) {
+      display: none;
+    }
+    .wg-dialog-topline > button {
+      margin-left: auto;
+    }
+    .wg-dialog-scroll {
+      padding: 23px 20px 0;
+    }
+    .wg-dialog-heading h2 {
+      font-size: 33px;
+    }
+    .wg-dialog-heading > .wg-label {
+      font-size: 7px;
+    }
+    .wg-dialog-introduction {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 23px 0;
+      margin-top: 23px;
+    }
+    .wg-dialog-art {
+      max-width: 300px;
+    }
+    .wg-dialog-remit {
+      gap: 19px;
+    }
+    .wg-dialog-remit dd {
+      font-size: 12px;
+    }
+    .wg-dialog-contribution {
+      padding: 23px 0;
+    }
+    .wg-dialog-contribution li {
+      font-size: 12px;
+    }
+    .wg-dialog-question {
+      padding: 23px 20px;
+    }
+    .wg-dialog-question > span {
+      font-size: 7px;
+    }
+    .wg-dialog-question > p {
+      font-size: 25px;
+    }
+    .wg-dialog-human {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      padding: 24px 0;
+    }
+    .wg-dialog-approach ol {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    .wg-dialog-approach li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .wg-dialog-approach li > span {
+      padding-top: 2px;
+    }
+    .wg-dialog-approach li > p {
+      margin: 0;
+      font-size: 12px;
+    }
+    .wg-dialog-evidence {
+      padding: 20px 18px;
+    }
+    .wg-dialog-evidence > div:last-child {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+    }
+    .wg-dialog-connections > a {
+      gap: 20px;
+    }
+    .wg-dialog-connections > a > span > span {
+      font-size: 10px;
+    }
+    .wg-dialog-footer > div > p:last-child {
+      font-size: 12px;
+    }
+    .wg-dialog-footer > button {
+      width: 100%;
+      font-size: 11px;
+    }
+  }
+  @media (max-width: 370px) {
+    .wg-panel-content,
+    .wg-panel-wide .wg-panel-content {
+      padding-inline: 20px;
+    }
+    .wg-panel h3,
+    .wg-panel-wide h3 {
+      font-size: 32px;
+    }
+    .wg-panel-status {
+      font-size: 8px;
+    }
+    .wg-panel-topline {
+      font-size: 7px;
+    }
+    .wg-panel-subtitle,
+    .wg-panel-description {
+      font-size: 11px;
+    }
+    .wg-panel-art,
+    .wg-panel-wide .wg-panel-art,
+    .wg-panel:nth-child(4) .wg-panel-art {
+      height: 150px;
+      min-height: 150px;
+    }
+    .wg-dialog-heading h2 {
+      font-size: 30px;
+    }
+    .wg-dialog {
+      width: calc(100% - 18px);
+      height: calc(100dvh - 18px);
+      max-height: calc(100dvh - 18px);
+    }
+    .wg-dialog-scroll {
+      padding-inline: 17px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wg-panel-open > svg {
+      transition: none;
+    }
+    .wg-panel-open:hover > svg {
+      transform: none;
+    }
+  }
+}

@@ -8,7 +8,7 @@
   .portfolio-search-dialog::backdrop { background:#111e19b3; backdrop-filter:blur(7px); }
   .portfolio-search-heading { display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; gap:25px; padding:25px 27px 21px; }
   .portfolio-search-heading > div > p { color:var(--muted); font:9px/1.8 var(--mono); letter-spacing:.7px; }
-  .portfolio-search-heading h2 { margin-top:10px; color:var(--ink); font-size:31px; font-weight:450; line-height:1.2; letter-spacing:-1.2px; }
+  .portfolio-search-heading h2 { margin-top:10px; color:var(--ink); font-family:var(--display);font-size:31px; font-weight:400; line-height:1.2; letter-spacing:-.4px; }
   .portfolio-search-close { display:grid; place-items:center; width:40px; height:40px; flex-shrink:0; background:transparent; border:1px solid var(--line); color:var(--muted); }
   .portfolio-search-close svg { width:18px; height:18px; }
   .portfolio-search-close:hover { border-color:var(--accent); color:var(--accent); }
