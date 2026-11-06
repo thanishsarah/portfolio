@@ -2,15 +2,17 @@
 
 A leadership-first React portfolio positioning Vinayak Thanish around AI integration for education, content, communications, and brand systems. It gives India and international conversations equal visibility, with a separate advisory enquiry route. The current AI integration remit is explicitly ongoing; completed rollout, ROI, executive titles, and formal IB credentials are not inferred from the supplied materials.
 
-## Brand and interactions
+## Experience and interactions
 
-The **VT Pathway** mark connects an open V with a shared T canopy; a detached seed suggests the next connection. The reusable component is `src/BrandMark.jsx`, the transparent vector asset is `public/brand-mark.svg`, and `public/favicon.svg` provides the matching site icon.
+The portfolio connects a visitor’s challenge, relevant experience, an inspectable editorial decision, and a contextual conversation. The three practice lenses in `src/practice-model.js` share state with the case explorer and conversation brief. Case narratives distinguish current remit, experience, personal responsibility, working approach, and public organisational context.
 
-The dedicated AI integration section offers four interactive workstreams: content creation, institutional communication, brand and promotion, and business promotion. Human-review checkpoints and the feedback loop are explicitly proposed design principles, not claims of installed institutional governance. Working-context links are supplied by the portfolio owner and do not imply endorsement. Selected work explains roles, scope, and evidence boundaries; project filters and native modal dialogs provide keyboard access and focus restoration.
+`src/DecisionStudio.jsx` is an original fictional communication review. Its three editorial choices change the draft and its hold state; the final state still requires human review. It uses fixed illustrative material, has no AI service or publication endpoint, and does not represent a delivered institutional workflow.
 
-The contact section prioritizes leadership enquiries and offers a separate consulting/advisory route with an appropriate email subject. Experience entries expand individually; formal résumé titles remain intact. The visual identity uses warm white, ink navy, cobalt, and muted moss, with original diagrams and the custom VT mark. Manrope is self-hosted through Fontsource; its OFL license is included in `public/licenses/manrope.txt`. The social sharing image is generated from an original SVG composition.
+Explored cases and the visitor’s optional challenge remain in page memory. The contact area previews the complete conversation brief before an explicit copy or email action. Reset clears the route and draft; reloading does not preserve them. No analytics, tracking, external font request, database, or API key is required. A persistent motion preference is the only local-storage setting.
 
-Motion has a persistent on/off control, follows the system’s reduced-motion preference, and pauses when the document is hidden. All initiative illustrations are original SVGs labeled as illustrations; they are not screenshots of delivered products. No animation library, tracking, external font request, backend, or API key is required.
+The curriculum and international overviews are supporting disclosures, with direct fragment links that reveal the relevant section. Curriculum search, filters, and native overview dialogs remain keyboard accessible. Formal résumé titles and qualifications remain intact.
+
+The VT Pathway mark, original project illustrations, and measured geometric field share the charcoal, warm stone, bronze, and mineral-green palette. Source vectors live in `public/` and `src/ProjectArtwork.jsx`. Manrope is self-hosted through Fontsource; its OFL license is in `public/licenses/manrope.txt`. Motion follows system preferences and the footer control.
 
 ## Develop
 
@@ -23,11 +25,17 @@ npm run dev
 
 The development server uses port 5173 by default. No API keys, database, or backend service is required.
 
-## Make it yours
+## Content and presentation
 
-Edit `src/content.js` to update your name, role, introduction, biography, interests, contact email, social links, initiatives, experience, and education. A project’s optional `url` enables a link in its detail dialog. Contact links appear when an email address is supplied; social links appear when supplied. No project or social URLs were inferred from the résumé. The original résumé PDF, phone number, and date of birth are not included in the website.
+- `src/content.js`: personal details, professional record, and education.
+- `src/case-studies.js`: public case narratives and evidence boundaries.
+- `src/practice-model.js`: shared challenge lenses and conversation-brief composition.
+- `src/ai-practice.js`: current AI remit and workstreams.
+- `src/curriculum.js` and `src/international.js`: public educational overviews.
+- `src/decision-studio.js`: the original fictional review example.
+- `src/experience.css`: global design rules and shell; feature styles live beside their components.
 
-Update the description and theme color in `index.html` as needed. Styling lives in `src/styles.css`; the original decorative project illustrations live in `src/ProjectArtwork.jsx`.
+Update the description and theme color in `index.html` as needed. Personal source documents, phone number, date of birth, and confidential originals are excluded from the website.
 
 ## Confidential curriculum work
 

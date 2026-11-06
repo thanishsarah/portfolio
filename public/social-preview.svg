@@ -1,26 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <title>Vinayak Thanish — Turning complexity into shared capability</title>
+  <desc>A connected practice in education, communication and AI, with original geometric construction drawing.</desc>
   <rect width="1200" height="630" fill="#18231f"/>
-  <path d="M70 114H1130M70 542H1130" stroke="#566156"/>
-  <g fill="#eee7d8" transform="translate(59 26) scale(.9)"><path d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"/><path d="M45 15H71V23H61V49H53V23H44L45 15Z"/><path d="M64.1 56.7a8.3 8.3 0 1 1-11.4-2.8" fill="none" stroke="#c5a36d" stroke-width="1.2" stroke-linecap="round"/><circle cx="57" cy="61" r="3.5" fill="#c5a36d"/></g>
-  <text x="148" y="76" font-family="Arial,sans-serif" font-size="23" font-weight="600" fill="#eee7d8">Vinayak Thanish</text>
-  <text x="70" y="186" font-family="Arial,sans-serif" font-size="14" letter-spacing="2" fill="#bdb8a9">EDUCATION / CONTENT / COMMUNICATIONS</text>
-  <text x="67" y="292" font-family="Arial,sans-serif" font-size="88" letter-spacing="-5" fill="#eee7d8">AI integration.</text>
-  <text x="67" y="394" font-family="Georgia,serif" font-style="italic" font-size="87" letter-spacing="-4" fill="#c5a36d">Human direction.</text>
-  <text x="70" y="483" font-family="Arial,sans-serif" font-size="20" fill="#bdb8a9">Connecting people, learning and practical AI adoption.</text>
-  <g transform="translate(933 315)" fill="none">
-    <path d="M-135 160V-30a135 135 0 0 1 270 0v190M-110 160V-30a110 110 0 0 1 220 0v190M-85 160V-30a85 85 0 0 1 170 0v190" stroke="#eee7d8" stroke-opacity=".18"/>
-    <path d="M0-170V170M-160 98H160M-160-30H160" stroke="#eee7d8" stroke-opacity=".12"/>
-    <circle cy="-30" r="58" stroke="#c5a36d" stroke-opacity=".65"/>
-    <path d="M-41-71a58 58 0 0 1 82 82" stroke="#c5a36d" stroke-width="2"/>
-    <circle cy="-30" r="29" fill="#c5a36d"/>
-    <path d="M0-59V-1M-29-30H29" stroke="#18231f" stroke-width="1"/>
-    <circle cy="-30" r="6" fill="#18231f"/>
-    <path d="M0 28V98M0 98-76 153M0 98 76 153" stroke="#c5a36d" stroke-opacity=".7"/>
-    <circle cy="98" r="4" fill="#eee7d8"/>
-    <circle cx="-76" cy="153" r="3" fill="#c5a36d"/>
-    <circle cx="76" cy="153" r="3" fill="#c5a36d"/>
-    <path d="M-153-102H-141M-147-108V-96M141 98H153M147 92V104" stroke="#c5a36d"/>
+  <path d="M70 115H1130M70 548H1130" stroke="#c5a36d" stroke-opacity=".3"/>
+  <g fill="#eee7d8" transform="translate(60 26) scale(.9)">
+    <path d="M10 15H19L32 49L45 15H54L36.4 63H27.6L10 15Z"/>
+    <path d="M45 15H71V23H61V49H53V23H44L45 15Z"/>
+    <path d="M64.1 56.7a8.3 8.3 0 1 1-11.4-2.8" fill="none" stroke="#c5a36d" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="57" cy="61" r="3.5" fill="#c5a36d"/>
   </g>
-  <text x="70" y="585" font-family="Arial,sans-serif" font-size="14" fill="#bdb8a9">INDIA ↔ INTERNATIONAL</text>
-  <text x="1130" y="585" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#eee7d8">A CONNECTED PRACTICE</text>
+  <text x="148" y="76" font-family="Arial,sans-serif" font-size="24" font-weight="600" letter-spacing="-.7" fill="#eee7d8">Vinayak Thanish</text>
+  <text x="1130" y="74" text-anchor="end" font-family="monospace" font-size="11" letter-spacing="1" fill="#bdb8a9">A CONNECTED PRACTICE</text>
+  <text x="70" y="168" font-family="monospace" font-size="12" letter-spacing="1.4" fill="#c5a36d">EDUCATION / COMMUNICATION / AI</text>
+  <text x="66" y="260" font-family="Arial,sans-serif" font-size="74" font-weight="400" letter-spacing="-4.2" fill="#eee7d8">Turning complexity</text>
+  <text x="69" y="350" font-family="Arial,sans-serif" font-size="74" font-weight="400" letter-spacing="-4" fill="#eee7d8">into</text>
+  <text x="195" y="350" font-family="Georgia,serif" font-style="italic" font-size="80" letter-spacing="-3.2" fill="#c5a36d">shared</text>
+  <text x="67" y="440" font-family="Georgia,serif" font-style="italic" font-size="87" letter-spacing="-3.5" fill="#c5a36d">capability.</text>
+  <text x="70" y="501" font-family="Arial,sans-serif" font-size="18" fill="#c5c3b6">Work people can understand, use, and carry forward.</text>
+  <g transform="translate(770 164)" fill="none">
+    <g stroke="#eee7d8" stroke-opacity=".13" stroke-width=".7">
+      <path d="M0 65H360M0 190H360M0 315H360M25 30V345M180 30V345M335 30V345"/>
+      <circle cx="180" cy="190" r="155"/>
+      <circle cx="180" cy="190" r="109" stroke-dasharray="2 6"/>
+    </g>
+    <g stroke="#eee7d8" stroke-opacity=".24" stroke-width=".7">
+      <path d="M25 315 180 65 335 315H25Z"/>
+      <path d="M50 275H310M75 235H285M100 195H260M125 155H235M150 115H210"/>
+      <path d="M180 65V315M90 315 180 170 270 315M126 315 180 228 234 315"/>
+    </g>
+    <path d="M25 315 180 65 285 235" stroke="#c5a36d" stroke-width="1.8"/>
+    <circle cx="180" cy="65" r="6" fill="#c5a36d"/>
+    <circle cx="180" cy="65" r="15" stroke="#c5a36d" stroke-width=".7"/>
+    <circle cx="25" cy="315" r="4" fill="#eee7d8"/>
+    <circle cx="335" cy="315" r="4" fill="#eee7d8"/>
+    <path d="M19 338H31M25 332V344M329 338H341M335 332V344" stroke="#c5a36d" stroke-width=".7"/>
+    <g fill="#bdb8a9" font-family="monospace" font-size="9" letter-spacing="1">
+      <text x="180" y="35" text-anchor="middle">INTENTION</text>
+      <text x="5" y="366">PEOPLE</text>
+      <text x="355" y="366" text-anchor="end">PRACTICE</text>
+    </g>
+  </g>
+  <text x="70" y="589" font-family="monospace" font-size="12" letter-spacing=".8" fill="#bdb8a9">DELHI NCR / INDIA &amp; INTERNATIONAL</text>
+  <text x="1130" y="589" text-anchor="end" font-family="monospace" font-size="12" letter-spacing=".8" fill="#eee7d8">THE WORK IS CONNECTED.</text>
 </svg>

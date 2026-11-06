@@ -61,7 +61,7 @@ function CurriculumOverview({ item, index, onClose }) {
       <p className="curriculum-dialog-summary">{item.summary}</p>
       <h3 className="curriculum-focus-heading">Areas of focus</h3>
       <ul className="curriculum-focus-list">{item.focus.map(label => <li key={label}><span aria-hidden="true" />{label}</li>)}</ul>
-      <div className="curriculum-dialog-discretion"><span className="curriculum-small-seed" aria-hidden="true" /><p>This is a public overview. Full lesson plans and programme documents are kept private and shared separately, following a direct conversation.</p></div>
+      <div className="curriculum-dialog-discretion"><span className="curriculum-small-seed" aria-hidden="true" /><p>This is a public overview. Full lesson plans and programme documents remain private. A conversation can explore my contribution and approach.</p></div>
       <a className="curriculum-enquiry" href={enquiry}>Discuss this curriculum <CurriculumArrow /></a>
     </div>
   </dialog>;
@@ -128,7 +128,7 @@ export default function CurriculumShowcase() {
 
       {results.length === 0 && <div className="curriculum-empty"><CurriculumGlyph index={3} /><h3>No matching public overviews.</h3><p>Try another topic or clear the filters to explore the collection.</p><button type="button" className="curriculum-reset" onClick={clearFilters}>Clear search and filters <CurriculumArrow /></button></div>}
 
-      <div className="curriculum-discretion"><p>Looking for the full context?<br /><span>Original materials are shared separately, following a direct conversation.</span></p><a href={`mailto:${profile.email}?subject=${encodeURIComponent('Curriculum enquiry')}`}>Let’s discuss your context <CurriculumArrow /></a></div>
+      <div className="curriculum-discretion"><p>Curious about the thinking behind this work?<br /><span>Original materials remain private. We can discuss the context and my contribution.</span></p><a href={`mailto:${profile.email}?subject=${encodeURIComponent('Curriculum enquiry')}`}>Let’s discuss your context <CurriculumArrow /></a></div>
     </div>
     {selected && <CurriculumOverview item={selected} index={publicCurricula.indexOf(selected)} onClose={closeOverview} />}
   </section>;
