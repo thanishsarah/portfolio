@@ -1,6 +1,9 @@
 /** A modern, explicit Royal Game of Ur ruleset. Pure state, seeded casting, no services. */
 export const UR_ROSETTES = Object.freeze([3, 7, 13]);
 export const UR_ROLL_WEIGHTS = Object.freeze([1, 4, 6, 4, 1]);
+export const UR_ROLL_PROBABILITIES = Object.freeze(
+  UR_ROLL_WEIGHTS.map((weight) => weight / 16),
+);
 export const UR_PATHS = Object.freeze({
   human: Object.freeze(
     [
@@ -61,6 +64,7 @@ export function createUrGame({ pieces = 3, seed = 1597334677 } = {}) {
 }
 export function getUrMoves(state) {
   if (
+    state.winner ||
     state.phase !== "move" ||
     !Number.isInteger(state.roll) ||
     state.roll < 1 ||
@@ -166,31 +170,179 @@ export function moveUr(state, piece) {
           : "move",
   );
 }
-/** Transparent heuristic: progress, capture, exact exit, extra turns, and weighted capture risk. */
-export function chooseUrMove(state) {
-  const legal = getUrMoves(state);
-  const rival = state.positions[opponent(state.turn)];
-  function value(move) {
-    let score = move.exit
-      ? 35
-      : (move.to - (move.from < 0 ? -1 : move.from)) * 2;
-    if (move.capture >= 0) score += 18 + (move.to + 1) * 1.15;
-    if (move.rosette) score += 12;
-    if (move.from < 0) score += 3;
-    if (move.to >= 4 && move.to <= 11 && move.to !== 7) {
-      let risk = 0;
-      for (const position of rival) {
-        const distance = move.to - position;
-        if (position >= 0 && position < 14 && distance >= 1 && distance <= 4)
-          risk += UR_ROLL_WEIGHTS[distance] / 16;
-      }
-      score -= Math.min(1, risk) * (move.to + 1) * 1.8;
-    }
-    return score;
+/** Project a legal move without advancing dice, logs, or live state. */
+function projectMove(state, move) {
+  const player = state.turn;
+  const other = opponent(player);
+  const positions = {
+    human: [...state.positions.human],
+    archivist: [...state.positions.archivist],
+  };
+  positions[player][move.piece] = move.to;
+  if (move.capture >= 0) positions[other][move.capture] = -1;
+  const winner = positions[player].every((position) => position === 14)
+    ? player
+    : null;
+  return {
+    ...state,
+    positions,
+    phase: winner ? "finished" : "roll",
+    winner,
+    turn: winner || move.rosette ? player : other,
+  };
+}
+
+function pieceValue(position) {
+  if (position < 0) return 0;
+  if (position === 14) return 46;
+  // The private return court and protected central rosette preserve progress.
+  return (position + 1) * 2 + (position >= 12 ? 3 : position === 7 ? 5 : 0);
+}
+
+function positionValue(state, player) {
+  if (state.winner) return state.winner === player ? 10000 : -10000;
+  const total = (owner) =>
+    state.positions[owner].reduce(
+      (sum, position) => sum + pieceValue(position),
+      0,
+    );
+  return total(player) - total(opponent(player));
+}
+
+/**
+ * The exact probability that the rival's next cast OFFERS a legal capture.
+ * Each cast outcome is counted once, even if several rival pieces could move.
+ * This describes exposure, not a prediction that the rival will choose it.
+ */
+function captureExposure(state, player, piece) {
+  const position = state.positions[player][piece];
+  if (state.winner || position < 4 || position > 11 || position === 7) {
+    return { captureRisk: 0, captureWeight: 0, captureRolls: [] };
   }
+  const captureRolls = [];
+  let captureWeight = 0;
+  for (let roll = 1; roll <= 4; roll += 1) {
+    const response = {
+      ...state,
+      turn: opponent(player),
+      phase: "move",
+      roll,
+    };
+    if (getUrMoves(response).some((move) => move.capture === piece)) {
+      captureRolls.push(roll);
+      captureWeight += UR_ROLL_WEIGHTS[roll];
+    }
+  }
+  return { captureRisk: captureWeight / 16, captureWeight, captureRolls };
+}
+
+/** One chance layer and one best legal reply; no live random value is inspected. */
+function expectedReplyValue(state, player) {
+  if (state.winner) return positionValue(state, player);
+  let expected = 0;
+  const maximizing = state.turn === player;
+  for (let roll = 0; roll <= 4; roll += 1) {
+    const response = { ...state, phase: "move", roll };
+    const legal = getUrMoves(response);
+    let best;
+    if (!legal.length) {
+      const nextTurn = opponent(state.turn);
+      best = positionValue(state, player) + (nextTurn === player ? 1.5 : -1.5);
+    } else {
+      const values = legal.map((move) => {
+        const after = projectMove(response, move);
+        return (
+          positionValue(after, player) +
+          (after.winner ? 0 : after.turn === player ? 1.5 : -1.5)
+        );
+      });
+      best = maximizing ? Math.max(...values) : Math.min(...values);
+    }
+    expected += UR_ROLL_PROBABILITIES[roll] * best;
+  }
+  return expected;
+}
+
+function moveDescription(state, move, exposure) {
+  const effects = [];
+  let reason;
+  if (move.exit) {
+    effects.push("Exact exit");
+    const remaining = state.positions[state.turn].filter(
+      (position) => position !== 14,
+    ).length;
+    reason =
+      remaining === 1
+        ? "Brings the final piece home and wins the race."
+        : "Brings one piece safely home with an exact cast.";
+  } else if (move.to === 7) {
+    effects.push("Protected rosette", "Another cast");
+    reason = "Claims the protected central rosette and earns another cast.";
+  } else if (move.capture >= 0) {
+    effects.push("Capture");
+    reason = "Sends a rival piece back to its start.";
+  } else if (move.rosette) {
+    effects.push("Another cast");
+    reason = "Lands on a rosette and earns another cast.";
+  } else if (move.from < 0) {
+    effects.push("Enter the race");
+    reason = "Brings a new piece into play.";
+  } else if (move.to >= 12) {
+    effects.push("Private return court");
+    reason =
+      "Leaves the shared road for the safety of the private return court.";
+  } else {
+    effects.push(`Advance ${state.roll}`);
+    reason = "Advances a piece toward home.";
+  }
+  if (exposure.captureWeight) {
+    effects.push("Exposed on the road");
+    reason += ` A rival's next cast offers a capture on ${exposure.captureWeight} of 16 equally likely stone patterns.`;
+  }
+  return { effects, reason };
+}
+
+/**
+ * Rank legal choices with deterministic, inspectable reasoning.
+ * Guide evaluates the immediate position; Strategist also weighs one best reply
+ * for every possible next cast. Both use the same rules and casting sequence.
+ */
+export function analyseUrMoves(state, { difficulty = "strategist" } = {}) {
+  const player = state.turn;
+  const ranked = getUrMoves(state)
+    .map((move) => {
+      const after = projectMove(state, move);
+      const exposure = captureExposure(after, player, move.piece);
+      const immediate =
+        positionValue(after, player) +
+        (after.winner ? 0 : move.rosette ? 4 : 0) -
+        exposure.captureRisk * (move.to + 1) * 1.5;
+      const expected =
+        difficulty === "guide" ? immediate : expectedReplyValue(after, player);
+      const value = after.winner
+        ? immediate
+        : difficulty === "guide"
+          ? immediate
+          : immediate * 0.25 + expected * 0.75;
+      return {
+        ...move,
+        ...exposure,
+        ...moveDescription(state, move, exposure),
+        value,
+        expectedReplyValue: expected,
+        difficulty: difficulty === "guide" ? "guide" : "strategist",
+      };
+    })
+    .sort((a, b) => b.value - a.value || a.piece - b.piece);
+  return ranked.map((move, index) => ({ ...move, recommended: index === 0 }));
+}
+
+export function explainUrMove(state, piece, options) {
   return (
-    legal
-      .map((move) => ({ ...move, value: value(move) }))
-      .sort((a, b) => b.value - a.value || a.piece - b.piece)[0] || null
+    analyseUrMoves(state, options).find((move) => move.piece === piece) || null
   );
+}
+
+export function chooseUrMove(state, options) {
+  return analyseUrMoves(state, options)[0] || null;
 }

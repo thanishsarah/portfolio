@@ -1,4 +1,5 @@
 import { useLayoutEffect, useEffect, useRef } from "react";
+import { createCastMotion, createPieceMotion } from "./ur-physics";
 
 function piecesIn(root) {
   const pieces = new Map();
@@ -15,6 +16,7 @@ function piecesIn(root) {
 export default function useUrMotion(rootRef, game, enabled) {
   const pending = useRef(null);
   const effects = useRef(new Set());
+  const previousCasts = useRef(game.casts);
 
   function count() {
     if (rootRef.current) {
@@ -51,21 +53,43 @@ export default function useUrMotion(rootRef, game, enabled) {
 
   function prepare() {
     stop();
-    pending.current = enabled ? piecesIn(rootRef.current) : null;
+    pending.current = enabled
+      ? { pieces: piecesIn(rootRef.current), positions: game.positions }
+      : null;
   }
 
   useLayoutEffect(() => {
     const root = rootRef.current;
     const before = pending.current;
+    const cast = game.casts > previousCasts.current;
+    previousCasts.current = game.casts;
     pending.current = null;
     if (!root || !enabled || !before) {
       if (!enabled) stop();
       return;
     }
+    if (cast) {
+      root.querySelectorAll("[data-ur-stone]").forEach((stone, index) => {
+        if (typeof stone.animate !== "function" || index > 3) return;
+        const curve = createCastMotion(index);
+        track(
+          stone.animate(curve.keyframes, {
+            duration: curve.duration,
+            easing: "linear",
+            fill: "none",
+          }),
+        );
+      });
+    }
     const after = piecesIn(root);
     const moved = [];
     for (const [key, destination] of after) {
-      const source = before.get(key);
+      const [owner, piece] = key.split("-");
+      // A preview or message may reflow the wells. Only a rule-model move
+      // should lift a token; unchanged pieces stay attached to their layout.
+      if (before.positions[owner]?.[piece] === game.positions[owner]?.[piece])
+        continue;
+      const source = before.pieces.get(key);
       if (!source) continue;
       const dx = source.rect.left - destination.rect.left;
       const dy = source.rect.top - destination.rect.top;
@@ -99,13 +123,12 @@ export default function useUrMotion(rootRef, game, enabled) {
       const opacity = element.style.opacity;
       element.style.opacity = "0";
       root.appendChild(ghost);
-      const animation = ghost.animate(
-        [
-          { transform: `translate(${dx}px, ${dy}px) scale(${scale})` },
-          { transform: "translate(0, 0) scale(1)" },
-        ],
-        { duration: 330, easing: "cubic-bezier(.22,.75,.25,1)", fill: "both" },
-      );
+      const curve = createPieceMotion({ dx, dy, fromScale: scale });
+      const animation = ghost.animate(curve.keyframes, {
+        duration: curve.duration,
+        easing: "linear",
+        fill: "both",
+      });
       track(animation, () => {
         ghost.remove();
         element.style.opacity = opacity;
@@ -119,7 +142,7 @@ export default function useUrMotion(rootRef, game, enabled) {
               { boxShadow: "inset 0 0 0 2px #fff1c7, 0 0 19px #d9aa5c99" },
               { boxShadow: "inset 0 0 0 2px #eadbb9, 0 0 0 #e9c77d00" },
             ],
-            { duration: 650, delay: 240, easing: "ease-out" },
+            { duration: 350, delay: curve.flight, easing: "ease-out" },
           ),
         );
       }

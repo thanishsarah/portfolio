@@ -499,22 +499,6 @@
     color: #8b846b;
     margin-top: 13px;
   }
-  .ur-game[data-motion="on"] .ur-stone {
-    animation: ur-cast 0.35s ease-out both;
-  }
-  @keyframes ur-cast {
-    0% {
-      transform: translateY(-3px) rotate(-8deg);
-      opacity: 0.65;
-    }
-    60% {
-      transform: translateY(2px) rotate(5deg);
-    }
-    100% {
-      transform: none;
-      opacity: 1;
-    }
-  }
 }
 @layer components {
   .ur-action-dock {
@@ -1256,6 +1240,278 @@
     .ur-match-types > button {
       font-size: 8px;
       padding-inline: 8px;
+    }
+  }
+}
+
+@layer components {
+  .ur-match-selection {
+    flex-shrink: 0;
+  }
+  .ur-intro .ur-current-race {
+    display: block;
+    margin: 7px 0 0;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #5b654f;
+    text-align: right;
+  }
+  .ur-route-legend {
+    margin: 7px 0 11px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #4a5b4e;
+  }
+  .ur-route-legend > span {
+    margin-right: 7px;
+    color: var(--ur-lapis);
+  }
+  .ur-square.is-preview-route {
+    background-color: #bfc7ac;
+    box-shadow: inset 0 0 0 2px #31535455;
+  }
+  .ur-square.is-preview-source {
+    box-shadow: inset 0 0 0 2px #315354;
+    outline: 1px dashed #315354;
+    outline-offset: -5px;
+  }
+  .ur-square.is-preview-target {
+    box-shadow: inset 0 0 0 3px #315354;
+    background-color: #d3d9bf;
+  }
+  .ur-square.is-preview-capture {
+    box-shadow: inset 0 0 0 3px #8a4e33;
+  }
+  .ur-move-insight {
+    border-left: 2px solid var(--ur-lapis);
+    background: #f4ead555;
+    padding: 13px 15px;
+    margin: 12px 0;
+    color: #3e5149;
+  }
+  .ur-move-insight > p {
+    font-size: 12px;
+    line-height: 1.75;
+    margin: 7px 0 0;
+  }
+  .ur-move-insight > .ur-insight-label {
+    font: 9px/1.6 var(--mono);
+    letter-spacing: 0.5px;
+    margin-top: 0;
+  }
+  .ur-move-insight > .ur-insight-route {
+    font-weight: 600;
+    color: #283f37;
+  }
+  .ur-effect-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+  }
+  .ur-effect-list > span {
+    border: 1px solid #9ba88d;
+    padding: 3px 7px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #315354;
+  }
+  .ur-move-insight > .ur-capture-risk {
+    color: #78482f;
+  }
+  .ur-inspect-moves {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid #b4bd9f;
+  }
+  .ur-inspect-moves > summary,
+  .ur-race-settings > summary,
+  .ur-race-review > summary {
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #3e5547;
+    min-height: 30px;
+  }
+  .ur-inspect-moves > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .ur-inspect-moves button {
+    min-height: 44px;
+    padding: 8px 11px;
+    background: #f1e8d5;
+    border: 1px solid #91a18a;
+    color: #315354;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .ur-inspect-moves button[aria-pressed="true"] {
+    background: #315354;
+    color: #f3e8cf;
+  }
+  .ur-inspect-moves > p,
+  .ur-race-settings > p,
+  .ur-race-review > p {
+    font-size: 11px;
+    line-height: 1.8;
+    color: #5b6551;
+    margin-top: 9px;
+  }
+  .ur-race-settings {
+    margin-top: 15px;
+    padding: 9px 0;
+    border-bottom: 1px solid #bdad8b;
+  }
+  .ur-race-settings fieldset {
+    border: 0;
+    padding: 0;
+    margin: 10px 0 0;
+    min-width: 0;
+  }
+  .ur-race-settings legend {
+    font: 9px/1.8 var(--mono);
+    color: #796344;
+    margin-bottom: 5px;
+  }
+  .ur-race-settings label {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    min-height: 48px;
+    padding: 6px 0;
+    cursor: pointer;
+  }
+  .ur-race-settings input {
+    accent-color: #315354;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+  .ur-race-settings strong,
+  .ur-race-settings small {
+    display: block;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .ur-race-settings small {
+    color: #616b55;
+    font-size: 10px;
+  }
+  .ur-pending-race {
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #879b80;
+    background: #dce0ca;
+  }
+  .ur-pending-race > p {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #3e5547;
+  }
+  .ur-pending-race > button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 44px;
+    width: 100%;
+    margin-top: 9px;
+    border: 0;
+    padding: 9px 11px;
+    background: #315354;
+    color: #f3e8cf;
+    font-size: 11px;
+    text-align: left;
+  }
+  .ur-decision {
+    padding: 13px 0;
+    border-bottom: 1px solid #bdad8b;
+  }
+  .ur-decision > p {
+    font: 8px/1.8 var(--mono);
+    letter-spacing: 0.4px;
+    color: #796344;
+    margin-bottom: 7px;
+  }
+  .ur-decision > span {
+    display: block;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #4e5d48;
+  }
+  .ur-race-review {
+    margin-top: 12px;
+  }
+  .ur-race-review ol {
+    margin-top: 7px;
+    max-height: 260px;
+    overflow: auto;
+    list-style: none;
+    padding: 0 6px 0 0;
+    overscroll-behavior: contain;
+  }
+  .ur-race-review li {
+    border-bottom: 1px solid #c5b08b55;
+    padding: 7px 0;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #526047;
+  }
+  .ur-move-choices > button > .ur-choice-copy {
+    flex-shrink: 1;
+    min-width: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .ur-choice-copy > small {
+    display: block;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #315354;
+  }
+  @media (max-width: 760px) {
+    .ur-match-selection {
+      width: 100%;
+    }
+    .ur-intro .ur-current-race {
+      text-align: left;
+    }
+    .ur-move-insight {
+      padding: 12px;
+    }
+    .ur-route-legend {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 1024px) and (max-height: 520px) and (orientation: landscape) {
+    .ur-match-selection {
+      width: auto;
+    }
+    .ur-intro .ur-current-race {
+      text-align: right;
+      font-size: 8px;
+      margin-top: 3px;
+    }
+    .ur-choice-copy > small {
+      display: none;
+    }
+    .ur-route-legend {
+      font-size: 9px;
+      line-height: 1.6;
+    }
+  }
+}
+
+@layer responsive {
+  @media (max-width: 1024px) and (max-height: 520px) and (orientation: landscape) {
+    .ur-intro .ur-current-race {
+      display: block;
+      font: 8px/1.5 var(--body);
+      margin-top: 3px;
+      letter-spacing: 0;
     }
   }
 }

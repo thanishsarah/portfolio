@@ -11,6 +11,8 @@ import {
   rollUr,
   moveUr,
   chooseUrMove,
+  analyseUrMoves,
+  UR_ROLL_PROBABILITIES,
   UR_PATHS,
   UR_ROSETTES,
 } from "./ur-game";
@@ -37,11 +39,11 @@ function Rosette() {
     </svg>
   );
 }
-function Stone({ value, index, revision, motion }) {
+function Stone({ value, index }) {
   return (
     <svg
-      key={motion ? revision : 0}
       className={value ? "ur-stone is-lit" : "ur-stone"}
+      data-ur-stone={index}
       viewBox="0 0 80 80"
       aria-label={`Stone ${index + 1}: ${value ? "marked" : "unmarked"}`}
       role="img"
@@ -71,6 +73,11 @@ export default function AncientGame({
   onExplore = () => {},
 }) {
   const [game, setGame] = useState(() => createUrGame({ seed: seed() }));
+  const [difficulty, setDifficulty] = useState("strategist");
+  const [pendingDifficulty, setPendingDifficulty] = useState("strategist");
+  const [pendingPieces, setPendingPieces] = useState(3);
+  const [previewPiece, setPreviewPiece] = useState(null);
+  const [lastDecision, setLastDecision] = useState(null);
   const [visible, setVisible] = useState(!document.hidden);
   const [reduced, setReduced] = useState(
     () => matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -87,11 +94,23 @@ export default function AncientGame({
   const keyboard = useRef({ active: false, anchor: null, internal: false });
   const moves = useMemo(() => getUrMoves(game), [game]);
   const human = game.turn === "human";
+  const analyses = useMemo(
+    () =>
+      human && game.phase === "move"
+        ? analyseUrMoves(game, { difficulty })
+        : [],
+    [game, human, difficulty],
+  );
+  const preview = analyses.find((item) => item.piece === previewPiece) || null;
+  const settingsPending =
+    pendingPieces !== game.pieces || pendingDifficulty !== difficulty;
+  const modeName = (value) => (value === "guide" ? "Guide" : "Strategist");
   const playable = active && visible;
   const moving = playable && motion && !reduced;
   const pieceMotion = useUrMotion(root, game, moving);
   function commit(next, animate = true) {
     if (next === currentGame.current) return;
+    setPreviewPiece(null);
     if (animate) pieceMotion.prepare();
     else pieceMotion.stop();
     currentGame.current = next;
@@ -198,21 +217,52 @@ export default function AncientGame({
         if (current !== previous) return;
         if (current.phase === "roll") commit(rollUr(current));
         else {
-          const move = chooseUrMove(current);
-          if (move) commit(moveUr(current, move.piece));
+          const move = chooseUrMove(current, { difficulty });
+          if (move) {
+            setLastDecision({
+              piece: move.piece,
+              reason: move.reason,
+              revision: current.revision,
+              difficulty,
+            });
+            commit(moveUr(current, move.piece));
+          }
         }
       },
       motion ? 650 : 180,
     );
     return () => clearTimeout(timer);
-  }, [game, human, playable, motion]);
-  function restart(pieces = game.pieces, event) {
+  }, [game, human, playable, motion, difficulty]);
+  function restart(event) {
     inputIntent(event);
-    commit(createUrGame({ pieces, seed: seed() }), false);
+    setDifficulty(pendingDifficulty);
+    setLastDecision(null);
+    commit(createUrGame({ pieces: pendingPieces, seed: seed() }), false);
   }
   function changeMatch(pieces, event) {
-    if (pieces === currentGame.current.pieces) return;
-    restart(pieces, event);
+    setPendingPieces(pieces);
+    if (
+      currentGame.current.casts === 0 &&
+      pieces !== currentGame.current.pieces
+    ) {
+      inputIntent(event);
+      commit(createUrGame({ pieces, seed: seed() }), false);
+    }
+  }
+  function changeDifficulty(value) {
+    setPendingDifficulty(value);
+    if (currentGame.current.casts === 0) setDifficulty(value);
+  }
+  function inspect(piece) {
+    if (playable && human && game.phase === "move") setPreviewPiece(piece);
+  }
+  function previewEvents(piece) {
+    return {
+      onFocus: () => inspect(piece),
+      onPointerEnter: (event) => {
+        if (event.pointerType !== "touch") inspect(piece);
+      },
+    };
   }
   function cast(event) {
     if (!playable || !human || game.phase !== "roll") return;
@@ -235,7 +285,9 @@ export default function AncientGame({
   const finished = (player) =>
     game.positions[player].filter((position) => position === 14).length;
   const primaryLabel = game.winner
-    ? "Begin another race"
+    ? settingsPending
+      ? "Start selected race"
+      : "Begin another race"
     : !human
       ? "The Archivist is thinking…"
       : game.phase === "move"
@@ -245,6 +297,30 @@ export default function AncientGame({
     item.exit
       ? `Bring piece ${item.piece + 1} home`
       : `${item.from < 0 ? "Enter" : item.capture >= 0 ? "Capture with" : "Move"} piece ${item.piece + 1} · square ${item.to + 1}`;
+  const moveEffects = (item) => {
+    const effects =
+      analyses.find((entry) => entry.piece === item.piece)?.effects || [];
+    return effects
+      .filter((effect) =>
+        ["Exact exit", "Protected rosette", "Another cast", "Capture"].includes(
+          effect,
+        ),
+      )
+      .join(" · ");
+  };
+  const routeLabel = (item) =>
+    `${item.from < 0 ? "Start" : `Square ${item.from + 1}`} → ${item.exit ? "Home" : `square ${item.to + 1}`} · ${game.roll} ${game.roll === 1 ? "step" : "steps"}`;
+  const previewClass = (index) => {
+    if (!preview || index < 0) return "";
+    let value = "";
+    if (index === preview.from) value += " is-preview-source";
+    if (index > preview.from && index <= preview.to)
+      value += " is-preview-route";
+    if (index === preview.to) value += " is-preview-target";
+    if (index === preview.to && preview.capture >= 0)
+      value += " is-preview-capture";
+    return value;
+  };
   return (
     <section
       ref={root}
@@ -255,6 +331,8 @@ export default function AncientGame({
       data-revision={game.revision}
       data-active={playable}
       data-motion={moving ? "on" : "off"}
+      data-ur-difficulty={difficulty}
+      data-ur-preview-piece={preview?.piece ?? ""}
       aria-labelledby="ur-title"
     >
       <div className="ur-intro">
@@ -262,21 +340,32 @@ export default function AncientGame({
           <p>MESOPOTAMIA / A MODERN PLAYABLE INTERPRETATION</p>
           <h3 id="ur-title">The Royal Game of Ur.</h3>
         </div>
-        <div className="ur-match-types" role="group" aria-label="Match length">
-          <button
-            type="button"
-            aria-pressed={game.pieces === 3}
-            onClick={(event) => changeMatch(3, event)}
+        <div className="ur-match-selection">
+          <div
+            className="ur-match-types"
+            role="group"
+            aria-label="Selected race length"
           >
-            Quick / 3 pieces
-          </button>
-          <button
-            type="button"
-            aria-pressed={game.pieces === 7}
-            onClick={(event) => changeMatch(7, event)}
-          >
-            Full / 7 pieces
-          </button>
+            <button
+              type="button"
+              aria-pressed={pendingPieces === 3}
+              onClick={(event) => changeMatch(3, event)}
+            >
+              Quick / 3 pieces
+            </button>
+            <button
+              type="button"
+              aria-pressed={pendingPieces === 7}
+              onClick={(event) => changeMatch(7, event)}
+            >
+              Full / 7 pieces
+            </button>
+          </div>
+          <p className="ur-current-race">
+            Playing: {game.pieces === 3 ? "Quick" : "Full"} ·{" "}
+            {modeName(difficulty)}
+            {settingsPending ? " / next race selected" : ""}
+          </p>
         </div>
       </div>
       <div className="ur-action-dock" aria-label="Turn controls">
@@ -305,9 +394,7 @@ export default function AncientGame({
           type="button"
           className="ur-primary"
           data-ur-action={game.winner ? "replay" : "cast"}
-          onClick={(event) =>
-            game.winner ? restart(game.pieces, event) : cast(event)
-          }
+          onClick={(event) => (game.winner ? restart(event) : cast(event))}
           disabled={
             !game.winner && (!playable || !human || game.phase !== "roll")
           }
@@ -328,11 +415,17 @@ export default function AncientGame({
                 type="button"
                 key={item.piece}
                 data-ur-action="move"
+                {...previewEvents(item.piece)}
                 onClick={(event) => move(item.piece, event)}
                 disabled={!playable}
               >
-                {moveLabel(item)}
-                <span aria-hidden="true">→</span>
+                <span className="ur-choice-copy">
+                  {moveLabel(item)}
+                  {moveEffects(item) && <small>{moveEffects(item)}</small>}
+                </span>
+                <span className="ur-choice-arrow" aria-hidden="true">
+                  →
+                </span>
               </button>
             ))}
           </div>
@@ -431,19 +524,20 @@ export default function AncientGame({
                   <button
                     type="button"
                     key={cell}
-                    className={`ur-square${rosette ? " is-rosette" : ""} is-legal`}
+                    className={`ur-square${rosette ? " is-rosette" : ""} is-legal${previewClass(humanIndex)}`}
                     aria-label={`Move piece ${legal.piece + 1} to ${label}`}
                     onClick={(event) => move(legal.piece, event)}
                     disabled={!playable}
                     data-destination={humanIndex}
                     data-ur-action="move"
+                    {...previewEvents(legal.piece)}
                   >
                     {content}
                   </button>
                 ) : (
                   <div
                     key={cell}
-                    className={`ur-square${rosette ? " is-rosette" : ""}`}
+                    className={`ur-square${rosette ? " is-rosette" : ""}${previewClass(humanIndex)}`}
                     role="img"
                     aria-label={label}
                   >
@@ -453,7 +547,7 @@ export default function AncientGame({
               })}
             </div>
             <div className="ur-board-caption">
-              <span>ROSETTES PROTECT / THE ROAD CONNECTS</span>
+              <span>ROSETTES: ANOTHER CAST / CENTRE: PROTECTED</span>
               <span>20 SQUARES</span>
             </div>
           </div>
@@ -464,6 +558,63 @@ export default function AncientGame({
               {finished("human")} / {game.pieces} HOME
             </span>
           </div>
+          <p className="ur-route-legend">
+            <span aria-hidden="true">↖ → ↘</span> Your route: left court →
+            shared road → right court → home.
+          </p>
+          {human && game.phase === "move" && (
+            <div className="ur-move-insight" data-ur-insight>
+              <p className="ur-insight-label">
+                {preview
+                  ? `PIECE ${preview.piece + 1} / MOVE PREVIEW`
+                  : "READ THE BOARD"}
+              </p>
+              {preview ? (
+                <>
+                  <p className="ur-insight-route">{routeLabel(preview)}</p>
+                  <div className="ur-effect-list">
+                    {preview.effects.map((effect) => (
+                      <span key={effect}>{effect}</span>
+                    ))}
+                  </div>
+                  <p>{preview.reason.split(" A rival's next cast")[0]}</p>
+                  {preview.captureWeight > 0 && (
+                    <p className="ur-capture-risk">
+                      Rival’s next cast offers a legal capture on{" "}
+                      {preview.captureWeight} of 16 equally likely stone
+                      patterns. It may choose another move.
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p>
+                  Hover or focus a destination to inspect its path and effects.
+                  Select a destination to move.
+                </p>
+              )}
+              <details className="ur-inspect-moves">
+                <summary>Inspect moves without playing</summary>
+                <div role="group" aria-label="Inspect a legal move">
+                  {analyses.map((item) => (
+                    <button
+                      type="button"
+                      key={item.piece}
+                      aria-pressed={preview?.piece === item.piece}
+                      onClick={() => inspect(item.piece)}
+                      {...previewEvents(item.piece)}
+                    >
+                      Inspect piece {item.piece + 1}
+                      {item.recommended ? " · suggested" : ""}
+                    </button>
+                  ))}
+                </div>
+                <p>
+                  Inspection never commits a move. The suggestion weighs the
+                  visible board; future casts are unknown.
+                </p>
+              </details>
+            </div>
+          )}
           <div className="ur-piece-wells">
             <div>
               <span>AT YOUR START</span>
@@ -489,6 +640,7 @@ export default function AncientGame({
                   onClick={(event) => move(homeMove.piece, event)}
                   disabled={!playable}
                   data-ur-action="move"
+                  {...previewEvents(homeMove.piece)}
                 >
                   Enter a piece <span aria-hidden="true">→</span>
                 </button>
@@ -582,13 +734,7 @@ export default function AncientGame({
           <div className="ur-casting-tray" aria-label="Last cast">
             <div className="ur-stones">
               {Array.from({ length: 4 }, (_, i) => (
-                <Stone
-                  key={i}
-                  index={i}
-                  value={game.dice[i] || 0}
-                  revision={game.casts}
-                  motion={moving}
-                />
+                <Stone key={i} index={i} value={game.dice[i] || 0} />
               ))}
             </div>
             <div className="ur-cast-total">
@@ -599,7 +745,7 @@ export default function AncientGame({
                   ? "MOST LIKELY / 6 IN 16"
                   : game.roll === null
                     ? "FOUR STONES / FIVE OUTCOMES"
-                    : `${[1, 4, 6, 4, 1][game.roll]} IN 16 CHANCE`}
+                    : `${UR_ROLL_PROBABILITIES[game.roll] * 16} IN 16 CHANCE`}
               </span>
             </div>
           </div>
@@ -608,9 +754,9 @@ export default function AncientGame({
               type="button"
               className="ur-primary"
               data-ur-action="replay"
-              onClick={(event) => restart(game.pieces, event)}
+              onClick={restart}
             >
-              Begin another race <span aria-hidden="true">→</span>
+              {primaryLabel} <span aria-hidden="true">→</span>
             </button>
           ) : (
             <button
@@ -637,10 +783,71 @@ export default function AncientGame({
               data-ur-action="move"
               onClick={(event) => move(exitMove.piece, event)}
               disabled={!playable}
+              {...previewEvents(exitMove.piece)}
             >
               Bring piece {exitMove.piece + 1} home{" "}
               <span aria-hidden="true">→</span>
             </button>
+          )}
+          <details className="ur-race-settings">
+            <summary>
+              Race settings{settingsPending ? " · next race" : ""}
+            </summary>
+            <fieldset>
+              <legend>The Archivist</legend>
+              {["guide", "strategist"].map((value) => (
+                <label key={value}>
+                  <input
+                    type="radio"
+                    name="ur-difficulty"
+                    value={value}
+                    checked={pendingDifficulty === value}
+                    onChange={() => changeDifficulty(value)}
+                  />
+                  <span>
+                    <strong>{modeName(value)}</strong>
+                    <small>
+                      {value === "guide"
+                        ? "Weighs the immediate move."
+                        : "Also weighs likely replies."}
+                    </small>
+                  </span>
+                </label>
+              ))}
+            </fieldset>
+            <p>
+              Both use the same fair stones: 0–4 marks have 1, 4, 6, 4, 1
+              chances in 16. The animation does not determine the cast.
+            </p>
+            {game.casts > 0 && (
+              <p>
+                Selections apply to the next race. Your current race continues
+                until you start again.
+              </p>
+            )}
+          </details>
+          {settingsPending && (
+            <div className="ur-pending-race">
+              <p>
+                Next race:{" "}
+                {pendingPieces === 3 ? "Quick / 3 pieces" : "Full / 7 pieces"} ·{" "}
+                {modeName(pendingDifficulty)}
+              </p>
+              <button type="button" onClick={restart}>
+                Start selected race <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          )}
+          {lastDecision && (
+            <div
+              className="ur-decision"
+              data-ur-decision-revision={lastDecision.revision}
+            >
+              <p>THE ARCHIVIST’S LAST DECISION</p>
+              <span>
+                Piece {lastDecision.piece + 1}: {lastDecision.reason}
+              </span>
+            </div>
           )}
           <div className="ur-score">
             <div>
@@ -708,9 +915,11 @@ export default function AncientGame({
           <details className="ur-strategy">
             <summary>Inside the Archivist’s strategy</summary>
             <p>
-              The opponent weighs progress, captures, safe rosettes, extra
-              casts, and exact exits. Capture risk uses the actual four-stone
-              probabilities. It sees the same board and casts by the same rules.
+              {difficulty === "strategist"
+                ? "The Strategist weighs each legal move, then the best reply to each of the five possible next casts."
+                : "The Guide weighs immediate progress, captures, rosettes, extra casts, and exact exits."}{" "}
+              Capture exposure uses the actual four-stone probabilities. Both
+              see the same board as you and cannot see future casts.
             </p>
             <a
               href="https://github.com/thanishsarah/portfolio/blob/main/src/ur-game.js"
@@ -720,12 +929,21 @@ export default function AncientGame({
               Inspect the game logic ↗
             </a>
           </details>
-          <button
-            type="button"
-            className="ur-reset"
-            onClick={(event) => restart(game.pieces, event)}
-          >
-            Restart this match
+          {game.events.length > 0 && (
+            <details className="ur-race-review">
+              <summary>
+                Review this race · {game.events.length} recent events
+              </summary>
+              <ol>
+                {[...game.events].reverse().map((event) => (
+                  <li key={event.id}>{event.text}</li>
+                ))}
+              </ol>
+              <p>The latest 40 events stay here while this race is open.</p>
+            </details>
+          )}
+          <button type="button" className="ur-reset" onClick={restart}>
+            {settingsPending ? "Start selected race" : "Restart this match"}
           </button>
           <p className="ur-local-note">
             The match pauses when this room closes or the page is hidden.
